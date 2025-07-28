@@ -8,11 +8,28 @@ const config: CapacitorConfig = {
     url: "https://5db65515-34e1-45df-8482-0237ca328164.lovableproject.com?forceHideBadge=true",
     cleartext: true
   },
+  android: {
+    minWebViewVersion: 88,
+    allowMixedContent: true,
+    captureInput: true,
+    webContentsDebuggingEnabled: false
+  },
   plugins: {
     SplashScreen: {
       launchShowDuration: 2000,
       backgroundColor: "#FF9500",
-      showSpinner: false
+      showSpinner: false,
+      androidSplashResourceName: "splash",
+      androidScaleType: "CENTER_CROP"
+    },
+    Keyboard: {
+      resize: "body",
+      style: "dark",
+      resizeOnFullScreen: true
+    },
+    StatusBar: {
+      style: "dark",
+      backgroundColor: "#FF9500"
     }
   }
 };
