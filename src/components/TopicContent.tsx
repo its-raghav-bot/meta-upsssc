@@ -6,7 +6,7 @@ import { ArrowLeft, CheckCircle2, Circle, RotateCcw } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { usePdfData } from "@/hooks/usePdfData";
 import { PdfViewer } from "@/components/PdfViewer";
-import { AdBanner } from "@/components/AdBanner";
+
 import { supabase } from "@/integrations/supabase/client";
 
 interface TopicContentProps {
@@ -90,11 +90,8 @@ export const TopicContent = ({ topic, onBack, onToggleComplete }: TopicContentPr
       </div>
 
       {/* Content */}
-      <div className="p-4 space-y-4">
-        {/* Ad Banner */}
-        <AdBanner position="top" />
-        
-        <Card className="p-6">
+      <div className="p-4 space-y-6 pb-6">
+        <Card className="p-4 md:p-6 shadow-sm">
           {(topic.type === 'pdf' && topic.pdfUrl) || pdfUrl ? (
             <PdfViewer
               pdfUrl={pdfUrl || topic.pdfUrl || ''}
@@ -114,18 +111,12 @@ export const TopicContent = ({ topic, onBack, onToggleComplete }: TopicContentPr
           )}
         </Card>
 
-        {/* Ad Banner */}
-        <AdBanner position="center" />
-
         {/* Topic metadata */}
-        <div className="mt-4 text-sm text-muted-foreground text-center">
+        <div className="text-sm text-muted-foreground text-center">
           {topic.lastRead && (
             <p>पिछली बार पढ़ा: {new Date(topic.lastRead).toLocaleDateString('hi-IN')}</p>
           )}
         </div>
-        
-        {/* Bottom Ad Banner */}
-        <AdBanner position="bottom" />
       </div>
     </div>
   );

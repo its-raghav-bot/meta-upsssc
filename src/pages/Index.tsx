@@ -6,7 +6,7 @@ import { ChapterList } from "@/components/ChapterList";
 import { TopicList } from "@/components/TopicList";
 import { TopicContent } from "@/components/TopicContent";
 import { SearchBar } from "@/components/SearchBar";
-import { AdBanner } from "@/components/AdBanner";
+
 import { ProgressDashboard } from "@/components/ProgressDashboard";
 import { AdminPanel } from "@/components/AdminPanel";
 import { Subject, Chapter, Topic, SearchResult } from "@/types/notes";
@@ -208,8 +208,7 @@ const Index = () => {
       case 'subjects':
         return (
           <div className="space-y-4">
-            <AdBanner position="top" />
-            <div className="grid grid-cols-2 gap-3 max-h-[calc(100vh-200px)] overflow-y-auto">
+            <div className="grid grid-cols-2 gap-3 max-h-[calc(100vh-180px)] overflow-y-auto pb-4">
               {subjects.map(subject => (
                 <SubjectCard
                   key={subject.id}
@@ -218,19 +217,16 @@ const Index = () => {
                 />
               ))}
             </div>
-            <AdBanner position="bottom" />
           </div>
         );
 
       case 'topics':
         return navigation.currentChapter ? (
           <div className="space-y-4">
-            <AdBanner position="top" />
             <TopicList 
               topics={navigation.currentChapter.topics}
               onTopicClick={navigateToContent}
             />
-            <AdBanner position="bottom" />
           </div>
         ) : null;
 
@@ -271,7 +267,6 @@ const Index = () => {
       case 'progress':
         return (
           <div className="space-y-4">
-            <AdBanner position="top" />
             <ProgressDashboard 
               subjects={subjects} 
               recentTopics={getRecentTopics()} 
@@ -304,17 +299,27 @@ const Index = () => {
             <SearchBar onSearch={handleSearch} />
             
             {/* Bottom Navigation - Always visible */}
-            <div className="bottom-nav-container">
-              <div className="p-4 bg-background/95 backdrop-blur-sm border-t border-border">
-                <Card className="p-3 mx-auto max-w-md shadow-lg">
+            <div className="fixed bottom-0 left-0 right-0 z-20 bg-background/95 backdrop-blur-sm border-t border-border">
+              <div className="p-3">
+                <Card className="p-2 mx-auto max-w-sm shadow-lg">
                   <div className="flex items-center justify-around">
-                    <Button variant="ghost" size="sm" onClick={navigateToSubjects} className="flex-col gap-1 tap-target">
+                    <Button 
+                      variant={navigation.view === 'subjects' ? "default" : "ghost"} 
+                      size="sm" 
+                      onClick={navigateToSubjects} 
+                      className="flex-col gap-1 px-4 py-2 min-h-[44px]"
+                    >
                       <Search className="w-4 h-4" />
-                      <span className="text-xs">विषय</span>
+                      <span className="text-xs font-medium">विषय</span>
                     </Button>
-                    <Button variant="ghost" size="sm" onClick={navigateToProgress} className="flex-col gap-1 tap-target">
+                    <Button 
+                      variant={navigation.view === 'progress' ? "default" : "ghost"} 
+                      size="sm" 
+                      onClick={navigateToProgress} 
+                      className="flex-col gap-1 px-4 py-2 min-h-[44px]"
+                    >
                       <BarChart3 className="w-4 h-4" />
-                      <span className="text-xs">प्रगति</span>
+                      <span className="text-xs font-medium">प्रगति</span>
                     </Button>
                   </div>
                 </Card>
@@ -322,7 +327,7 @@ const Index = () => {
             </div>
             
             {/* Main Content */}
-            <div className="main-content-with-nav">
+            <div className="pb-20">
               {renderContent()}
             </div>
           </div>
