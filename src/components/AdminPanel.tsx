@@ -1,7 +1,5 @@
 import { useState } from 'react';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { collection, addDoc } from 'firebase/firestore';
-import { storage, db } from '@/lib/firebase';
+import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -55,21 +53,36 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
 
     setUploading(true);
     try {
-      // Upload file to Firebase Storage
-      const storageRef = ref(storage, `notes/${formData.subject}/${formData.chapter}/${formData.file.name}`);
-      const snapshot = await uploadBytes(storageRef, formData.file);
-      const downloadURL = await getDownloadURL(snapshot.ref);
+      // Generate unique file path
+      const fileExt = formData.file.name.split('.').pop();
+      const fileName = `${Date.now()}-${formData.file.name}`;
+      const filePath = `${formData.subject}/${formData.chapter}/${fileName}`;
 
-      // Save metadata to Firestore
-      await addDoc(collection(db, 'notes'), {
-        subject: formData.subject,
-        chapter: formData.chapter,
-        topicName: formData.topicName,
-        fileName: formData.file.name,
-        downloadURL,
-        uploadedAt: new Date(),
-        fileSize: formData.file.size
-      });
+      // Upload file to Supabase Storage
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from('pdfs')
+        .upload(filePath, formData.file);
+
+      if (uploadError) throw uploadError;
+
+      // Get public URL
+      const { data: urlData } = supabase.storage
+        .from('pdfs')
+        .getPublicUrl(filePath);
+
+      // Save metadata to Supabase database
+      const { error: dbError } = await supabase
+        .from('notes')
+        .insert({
+          subject_id: formData.subject,
+          chapter_id: formData.chapter,
+          topic_id: formData.topicName.toLowerCase().replace(/\s+/g, '-'),
+          title: formData.topicName,
+          content: `PDF Document: ${formData.topicName}`,
+          user_id: '00000000-0000-0000-0000-000000000000' // Placeholder for admin uploads
+        });
+
+      if (dbError) throw dbError;
 
       toast({
         title: "सफलतापूर्वक अपलोड",

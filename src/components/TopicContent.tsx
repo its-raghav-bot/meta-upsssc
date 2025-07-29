@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Topic } from "@/types/notes";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, CheckCircle2, Circle, RotateCcw } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Circle, RotateCcw, Download, ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { usePdfData } from "@/hooks/usePdfData";
 
 interface TopicContentProps {
   topic: Topic;
@@ -13,9 +14,26 @@ interface TopicContentProps {
 
 export const TopicContent = ({ topic, onBack, onToggleComplete }: TopicContentProps) => {
   const [fontSize, setFontSize] = useState(16);
+  const [pdfUrl, setPdfUrl] = useState<string>('');
+  const { pdfNotes, getPdfUrl, downloadPdf } = usePdfData();
 
   const increaseFontSize = () => setFontSize(prev => Math.min(prev + 2, 24));
   const decreaseFontSize = () => setFontSize(prev => Math.max(prev - 2, 12));
+
+  // Check if this topic has an associated PDF in Supabase
+  useEffect(() => {
+    const matchingPdfNote = pdfNotes.find(note => 
+      note.topic_id === topic.id || 
+      note.title.toLowerCase() === topic.name.toLowerCase()
+    );
+    
+    if (matchingPdfNote) {
+      // Construct the file path and get the public URL
+      const fileName = `${Date.now()}-${topic.name.replace(/\s+/g, '-')}.pdf`;
+      const url = getPdfUrl(matchingPdfNote.subject_id, matchingPdfNote.chapter_id, fileName);
+      setPdfUrl(url);
+    }
+  }, [pdfNotes, topic.id, topic.name, getPdfUrl]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -71,21 +89,46 @@ export const TopicContent = ({ topic, onBack, onToggleComplete }: TopicContentPr
       {/* Content */}
       <div className="p-4">
         <Card className="p-6">
-          {topic.type === 'pdf' && topic.pdfUrl ? (
+          {(topic.type === 'pdf' && topic.pdfUrl) || pdfUrl ? (
             <div className="text-center py-8">
-              <p className="text-muted-foreground mb-4">
-                PDF फाइल देखने के लिए नीचे क्लिक करें:
-              </p>
-              <a
-                href={topic.pdfUrl}
-                download
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button className="bg-blue-600 text-white hover:bg-blue-700">
-                  📥 PDF डाउनलोड करें
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-2">PDF नोट्स उपलब्ध हैं</h3>
+                <p className="text-muted-foreground mb-4">
+                  PDF फाइल देखने या डाउनलोड करने के लिए नीचे के विकल्प चुनें:
+                </p>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                {/* Download Button */}
+                <Button 
+                  className="bg-primary text-primary-foreground hover:bg-primary/90"
+                  onClick={() => {
+                    const url = pdfUrl || topic.pdfUrl || '';
+                    const fileName = `${topic.name}.pdf`;
+                    downloadPdf(url, fileName);
+                  }}
+                >
+                  <Download className="w-4 h-4 mr-2" />
+                  डाउनलोड करें
                 </Button>
-              </a>
+
+                {/* Open in New Tab Button */}
+                <Button 
+                  variant="outline"
+                  onClick={() => {
+                    const url = pdfUrl || topic.pdfUrl || '';
+                    window.open(url, '_blank');
+                  }}
+                >
+                  <ExternalLink className="w-4 h-4 mr-2" />
+                  नई टैब में खोलें
+                </Button>
+              </div>
+              
+              {/* PDF Preview Info */}
+              <div className="mt-4 text-sm text-muted-foreground">
+                <p>📱 मोबाइल में PDF देखने के लिए "नई टैब में खोलें" का उपयोग करें</p>
+              </div>
             </div>
           ) : (
             <div 

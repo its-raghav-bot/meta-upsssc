@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNotesData } from "@/hooks/useNotesData";
 import { Header } from "@/components/Header";
 import { SubjectCard } from "@/components/SubjectCard";
@@ -7,11 +7,12 @@ import { TopicList } from "@/components/TopicList";
 import { TopicContent } from "@/components/TopicContent";
 import { SearchBar } from "@/components/SearchBar";
 import { ProgressDashboard } from "@/components/ProgressDashboard";
+import { AdminPanel } from "@/components/AdminPanel";
 import { Subject, Chapter, Topic, SearchResult } from "@/types/notes";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Home, Search, BarChart3, Clock } from "lucide-react";
+import { ArrowLeft, Home, Search, BarChart3, Clock, Settings } from "lucide-react";
 
 type ViewType = 'home' | 'subjects' | 'chapters' | 'topics' | 'content' | 'search' | 'progress';
 
@@ -39,6 +40,31 @@ const Index = () => {
   
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+  const [showAdminPanel, setShowAdminPanel] = useState(false);
+  const [adminKeySequence, setAdminKeySequence] = useState<string[]>([]);
+
+  // Admin key sequence detection (A-D-M-I-N)
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      const key = event.key.toUpperCase();
+      const targetSequence = ['A', 'D', 'M', 'I', 'N'];
+      
+      setAdminKeySequence(prev => {
+        const newSequence = [...prev, key].slice(-5); // Keep only last 5 keys
+        
+        if (newSequence.length === 5 && 
+            newSequence.every((k, i) => k === targetSequence[i])) {
+          setShowAdminPanel(true);
+          return [];
+        }
+        
+        return newSequence;
+      });
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, []);
 
   // Navigation functions
   const navigateHome = () => {
@@ -313,6 +339,11 @@ const Index = () => {
             </div>
           </div>
         </>
+      )}
+      
+      {/* Admin Panel */}
+      {showAdminPanel && (
+        <AdminPanel onClose={() => setShowAdminPanel(false)} />
       )}
     </div>
   );
