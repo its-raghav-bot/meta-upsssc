@@ -47,32 +47,89 @@ export const usePdfData = () => {
   };
 
   const downloadPdf = async (pdfUrl: string, fileName: string) => {
+    let link: HTMLAnchorElement | null = null;
+    let objectUrl: string | null = null;
+    
     try {
+      // Check if URL is accessible first
+      if (!pdfUrl || !fileName) {
+        throw new Error('Invalid URL or filename');
+      }
+
+      // Use a more direct approach for modern browsers
+      if ('showSaveFilePicker' in window) {
+        // Modern File System Access API (Chrome 86+)
+        try {
+          const response = await fetch(pdfUrl);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const blob = await response.blob();
+          
+          const fileHandle = await (window as any).showSaveFilePicker({
+            suggestedName: fileName,
+            types: [{
+              description: 'PDF files',
+              accept: { 'application/pdf': ['.pdf'] }
+            }]
+          });
+          
+          const writableStream = await fileHandle.createWritable();
+          await writableStream.write(blob);
+          await writableStream.close();
+          
+          return; // Success, exit early
+        } catch (fsApiError) {
+          console.log('File System API failed, falling back to traditional method');
+          // Fall through to traditional method
+        }
+      }
+
+      // Traditional download method
       const response = await fetch(pdfUrl);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
+      
       const blob = await response.blob();
+      objectUrl = URL.createObjectURL(blob);
       
-      // Create download link
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
+      // Create and configure download link
+      link = document.createElement('a');
+      link.href = objectUrl;
       link.download = fileName;
-      link.style.display = 'none'; // Hide the link
+      link.style.cssText = 'display: none; position: absolute; left: -9999px;';
       
-      // Add to DOM, click, and remove immediately
+      // Add to DOM temporarily
       document.body.appendChild(link);
+      
+      // Trigger download
       link.click();
       
-      // Clean up after a short delay to ensure download starts
-      setTimeout(() => {
-        document.body.removeChild(link);
-        window.URL.revokeObjectURL(url);
-      }, 100);
+      // Immediate cleanup to prevent memory issues
+      requestAnimationFrame(() => {
+        if (link && link.parentNode) {
+          link.parentNode.removeChild(link);
+        }
+        if (objectUrl) {
+          URL.revokeObjectURL(objectUrl);
+        }
+      });
+      
     } catch (error) {
       console.error('Error downloading PDF:', error);
-      alert('Failed to download PDF. Please try again.');
+      
+      // Cleanup on error
+      if (link && link.parentNode) {
+        link.parentNode.removeChild(link);
+      }
+      if (objectUrl) {
+        URL.revokeObjectURL(objectUrl);
+      }
+      
+      // Show user-friendly error
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+      alert(`Failed to download PDF: ${errorMessage}. Please try again.`);
     }
   };
 
