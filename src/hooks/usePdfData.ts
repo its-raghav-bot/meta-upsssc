@@ -37,7 +37,8 @@ export const usePdfData = () => {
   }, []);
 
   const getPdfUrl = (subject: string, chapter: string, fileName: string) => {
-    const filePath = `${subject}/${chapter}/${fileName}`;
+    // Files are uploaded to subject/filename format, not subject/chapter/filename
+    const filePath = `${subject}/${fileName}`;
     const { data } = supabase.storage
       .from('pdfs')
       .getPublicUrl(filePath);
