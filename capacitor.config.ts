@@ -30,6 +30,18 @@ const config: CapacitorConfig = {
     StatusBar: {
       style: "dark",
       backgroundColor: "#FF9500"
+    },
+    AdMob: {
+      adMobTestDeviceIds: ["test-device-id"],
+      tagForChildDirectedTreatment: false,
+      tagForUnderAgeOfConsent: false,
+      maxAdContentRating: "T"
+    },
+    Filesystem: {
+      iosConcurrentReads: 3
+    },
+    Share: {
+      // No specific configuration needed
     }
   }
 };

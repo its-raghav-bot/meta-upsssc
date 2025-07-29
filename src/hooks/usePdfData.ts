@@ -46,7 +46,7 @@ export const usePdfData = () => {
     return data.publicUrl;
   };
 
-  const downloadPdf = async (pdfUrl: string, fileName: string) => {
+  const downloadPdf = async (pdfUrl: string, fileName: string, topicId?: string) => {
     let link: HTMLAnchorElement | null = null;
     let objectUrl: string | null = null;
     
@@ -78,6 +78,14 @@ export const usePdfData = () => {
           await writableStream.write(blob);
           await writableStream.close();
           
+          // Mark as downloaded if topicId provided
+          if (topicId) {
+            localStorage.setItem(`pdf_downloaded_${topicId}`, JSON.stringify({
+              fileName,
+              downloadedAt: new Date().toISOString()
+            }));
+          }
+          
           return; // Success, exit early
         } catch (fsApiError) {
           console.log('File System API failed, falling back to traditional method');
@@ -106,6 +114,14 @@ export const usePdfData = () => {
       // Trigger download
       link.click();
       
+      // Mark as downloaded if topicId provided
+      if (topicId) {
+        localStorage.setItem(`pdf_downloaded_${topicId}`, JSON.stringify({
+          fileName,
+          downloadedAt: new Date().toISOString()
+        }));
+      }
+      
       // Immediate cleanup to prevent memory issues
       requestAnimationFrame(() => {
         if (link && link.parentNode) {
@@ -133,11 +149,17 @@ export const usePdfData = () => {
     }
   };
 
+  const isPdfDownloaded = (topicId: string): boolean => {
+    const downloaded = localStorage.getItem(`pdf_downloaded_${topicId}`);
+    return !!downloaded;
+  };
+
   return {
     pdfNotes,
     loading,
     fetchPdfNotes,
     getPdfUrl,
-    downloadPdf
+    downloadPdf,
+    isPdfDownloaded
   };
 };

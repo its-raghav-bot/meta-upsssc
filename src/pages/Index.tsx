@@ -6,6 +6,7 @@ import { ChapterList } from "@/components/ChapterList";
 import { TopicList } from "@/components/TopicList";
 import { TopicContent } from "@/components/TopicContent";
 import { SearchBar } from "@/components/SearchBar";
+import { AdBanner } from "@/components/AdBanner";
 import { ProgressDashboard } from "@/components/ProgressDashboard";
 import { AdminPanel } from "@/components/AdminPanel";
 import { Subject, Chapter, Topic, SearchResult } from "@/types/notes";
@@ -206,23 +207,31 @@ const Index = () => {
 
       case 'subjects':
         return (
-          <div className="grid grid-cols-2 gap-3 max-h-[calc(100vh-200px)] overflow-y-auto">
-            {subjects.map(subject => (
-              <SubjectCard
-                key={subject.id}
-                subject={subject}
-                onClick={() => navigateToTopics(subject)}
-              />
-            ))}
+          <div className="space-y-4">
+            <AdBanner position="top" />
+            <div className="grid grid-cols-2 gap-3 max-h-[calc(100vh-200px)] overflow-y-auto">
+              {subjects.map(subject => (
+                <SubjectCard
+                  key={subject.id}
+                  subject={subject}
+                  onClick={() => navigateToTopics(subject)}
+                />
+              ))}
+            </div>
+            <AdBanner position="bottom" />
           </div>
         );
 
       case 'topics':
         return navigation.currentChapter ? (
-          <TopicList 
-            topics={navigation.currentChapter.topics}
-            onTopicClick={navigateToContent}
-          />
+          <div className="space-y-4">
+            <AdBanner position="top" />
+            <TopicList 
+              topics={navigation.currentChapter.topics}
+              onTopicClick={navigateToContent}
+            />
+            <AdBanner position="bottom" />
+          </div>
         ) : null;
 
       case 'content':
@@ -261,10 +270,13 @@ const Index = () => {
 
       case 'progress':
         return (
-          <ProgressDashboard 
-            subjects={subjects} 
-            recentTopics={getRecentTopics()} 
-          />
+          <div className="space-y-4">
+            <AdBanner position="top" />
+            <ProgressDashboard 
+              subjects={subjects} 
+              recentTopics={getRecentTopics()} 
+            />
+          </div>
         );
 
 
