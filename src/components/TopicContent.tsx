@@ -29,7 +29,7 @@ export const TopicContent = ({ topic, onBack, onToggleComplete }: TopicContentPr
             {topic.name}
           </h1>
         </div>
-        
+
         {/* Action buttons */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -51,9 +51,8 @@ export const TopicContent = ({ topic, onBack, onToggleComplete }: TopicContentPr
                 </>
               )}
             </Button>
-            
           </div>
-          
+
           {/* Font size controls */}
           <div className="flex items-center gap-1">
             <Button variant="ghost" size="sm" onClick={decreaseFontSize} className="px-2">
@@ -72,10 +71,21 @@ export const TopicContent = ({ topic, onBack, onToggleComplete }: TopicContentPr
       {/* Content */}
       <div className="p-4">
         <Card className="p-6">
-          {topic.type === 'pdf' ? (
+          {topic.type === 'pdf' && topic.pdfUrl ? (
             <div className="text-center py-8">
-              <p className="text-muted-foreground mb-4">PDF फाइल देखने के लिए फ़ाइल डाउनलोड करें</p>
-              <Badge variant="outline">{topic.filePath}</Badge>
+              <p className="text-muted-foreground mb-4">
+                PDF फाइल देखने के लिए नीचे क्लिक करें:
+              </p>
+              <a
+                href={topic.pdfUrl}
+                download
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button className="bg-blue-600 text-white hover:bg-blue-700">
+                  📥 PDF डाउनलोड करें
+                </Button>
+              </a>
             </div>
           ) : (
             <div 
@@ -88,7 +98,7 @@ export const TopicContent = ({ topic, onBack, onToggleComplete }: TopicContentPr
             </div>
           )}
         </Card>
-        
+
         {/* Topic metadata */}
         <div className="mt-4 text-sm text-muted-foreground text-center">
           {topic.lastRead && (

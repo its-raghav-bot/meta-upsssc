@@ -24,6 +24,7 @@ export interface Topic {
   type: 'text' | 'pdf';
   filePath?: string;
   isCompleted?: boolean;
+  pdfUrl?: string;
   lastRead?: Date;
   bookmark?: boolean;
   tags?: string[];

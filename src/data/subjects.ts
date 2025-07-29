@@ -48,7 +48,8 @@ export const subjects: Subject[] = [
 • नदी मार्ग परिवर्तन
 • भूकंप`,
             type: "text",
-            isCompleted: false
+            isCompleted: false,
+            pdfUrl: "https://hfqhntdyrtzvbkiekult.supabase.co/storage/v1/object/public/notes/itihas/DEEPTI%20(1).pdf"
           },
           {
             id: "vedic-civilization",
