@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Upload, Loader2 } from 'lucide-react';
+import { Upload, Loader2, Trash2, FileText } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 interface AdminPanelProps {
@@ -94,7 +94,28 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
   const [existingSubjects, setExistingSubjects] = useState<string[]>(predefinedSubjects);
   const [existingTopics, setExistingTopics] = useState<{[key: string]: string[]}>(predefinedTopics);
   const [loading, setLoading] = useState(false);
+  const [uploadedFiles, setUploadedFiles] = useState<any[]>([]);
+  const [showFileList, setShowFileList] = useState(false);
   const { toast } = useToast();
+
+  useEffect(() => {
+    fetchUploadedFiles();
+  }, []);
+
+  const fetchUploadedFiles = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('notes')
+        .select('*')
+        .not('file_path', 'is', null)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setUploadedFiles(data || []);
+    } catch (error) {
+      console.error('Error fetching files:', error);
+    }
+  };
 
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -354,6 +375,9 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
       // Reset form
       setFormData({ subject: '', topicName: '', file: null });
       
+      // Refresh file list
+      fetchUploadedFiles();
+      
     } catch (error) {
       console.error('Upload error:', error);
       toast({
@@ -366,14 +390,100 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
     }
   };
 
+  const handleDelete = async (noteId: string, filePath: string) => {
+    if (!confirm('Are you sure you want to delete this PDF? This action cannot be undone.')) {
+      return;
+    }
+
+    try {
+      // Delete from storage
+      const { error: storageError } = await supabase.storage
+        .from('pdfs')
+        .remove([filePath]);
+
+      if (storageError) throw storageError;
+
+      // Delete from database
+      const { error: dbError } = await supabase
+        .from('notes')
+        .delete()
+        .eq('id', noteId);
+
+      if (dbError) throw dbError;
+
+      toast({
+        title: "Successfully Deleted",
+        description: "PDF has been deleted successfully"
+      });
+
+      // Refresh file list
+      fetchUploadedFiles();
+      
+    } catch (error) {
+      console.error('Delete error:', error);
+      toast({
+        title: "Delete Error",
+        description: "Problem deleting PDF",
+        variant: "destructive"
+      });
+    }
+  };
+
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-      <Card className="w-full max-w-md">
+      <Card className="w-full max-w-4xl max-h-[80vh] overflow-y-auto">
         <CardHeader>
-          <CardTitle className="text-center">Admin Panel - PDF Upload</CardTitle>
+          <CardTitle className="text-center">Admin Panel - PDF Management</CardTitle>
+          <div className="flex gap-2 justify-center">
+            <Button 
+              onClick={() => setShowFileList(false)} 
+              variant={!showFileList ? "default" : "outline"}
+              size="sm"
+            >
+              <Upload className="w-4 h-4 mr-2" />
+              Upload PDF
+            </Button>
+            <Button 
+              onClick={() => setShowFileList(true)} 
+              variant={showFileList ? "default" : "outline"}
+              size="sm"
+            >
+              <FileText className="w-4 h-4 mr-2" />
+              Manage Files ({uploadedFiles.length})
+            </Button>
+          </div>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div>
+          {showFileList ? (
+            <div className="space-y-4">
+              <h3 className="font-semibold">Uploaded PDFs</h3>
+              {uploadedFiles.length === 0 ? (
+                <p className="text-muted-foreground text-center py-8">No PDFs uploaded yet</p>
+              ) : (
+                <div className="grid gap-3">
+                  {uploadedFiles.map((file) => (
+                    <div key={file.id} className="flex items-center justify-between p-3 border rounded-lg">
+                      <div className="flex-1">
+                        <p className="font-medium">{file.title}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {getSubjectDisplayName(file.subject_id)} • {file.created_at ? new Date(file.created_at).toLocaleDateString() : 'Unknown date'}
+                        </p>
+                      </div>
+                      <Button
+                        onClick={() => handleDelete(file.id, file.file_path)}
+                        variant="destructive"
+                        size="sm"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="space-y-4">
+            <div>
             <Label htmlFor="subject">Select Subject</Label>
             <Select value={formData.subject} onValueChange={(value) => 
               setFormData(prev => ({ ...prev, subject: value }))}>
@@ -430,26 +540,31 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
               onChange={handleFileChange}
               className="cursor-pointer"
             />
-          </div>
+            </div>
 
-          <div className="flex gap-2">
-            <Button 
-              onClick={handleUpload} 
-              disabled={uploading}
-              className="flex-1"
-            >
-              {uploading ? (
-                <>
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  Uploading...
-                </>
-              ) : (
-                <>
-                  <Upload className="h-4 w-4 mr-2" />
-                  Upload
-                </>
-              )}
-            </Button>
+            <div className="flex gap-2">
+              <Button 
+                onClick={handleUpload} 
+                disabled={uploading || showFileList}
+                className="flex-1"
+              >
+                {uploading ? (
+                  <>
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    Uploading...
+                  </>
+                ) : (
+                  <>
+                    <Upload className="h-4 w-4 mr-2" />
+                    Upload
+                  </>
+                )}
+              </Button>
+            </div>
+            </div>
+          )}
+
+          <div className="flex gap-2 mt-4">
             <Button variant="outline" onClick={onClose}>
               Close
             </Button>
