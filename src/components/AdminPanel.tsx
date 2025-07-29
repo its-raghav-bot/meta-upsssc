@@ -103,8 +103,8 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
       setFormData(prev => ({ ...prev, file }));
     } else {
       toast({
-        title: "गलत फ़ाइल",
-        description: "कृपया केवल PDF फ़ाइल अपलोड करें",
+        title: "Invalid File",
+        description: "Please upload only PDF files",
         variant: "destructive"
       });
     }
@@ -112,17 +112,17 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
 
   const getSubjectDisplayName = (subjectId: string) => {
     const subjectNames: {[key: string]: string} = {
-      'indian-history': 'भारतीय इतिहास',
-      'national-movement': 'राष्ट्रीय आंदोलन',
-      'geography': 'भूगोल',
-      'indian-economy': 'भारतीय अर्थव्यवस्था',
-      'constitution': 'संविधान',
-      'general-science': 'सामान्य विज्ञान',
-      'hindi': 'हिंदी',
-      'english': 'अंग्रेजी',
-      'mathematics': 'गणित',
-      'general-awareness': 'सामान्य जागरूकता',
-      'reasoning': 'तर्कशक्ति'
+      'indian-history': 'Indian History',
+      'national-movement': 'National Movement',
+      'geography': 'Geography',
+      'indian-economy': 'Indian Economy',
+      'constitution': 'Constitution',
+      'general-science': 'General Science',
+      'hindi': 'Hindi',
+      'english': 'English',
+      'mathematics': 'Mathematics',
+      'general-awareness': 'General Awareness',
+      'reasoning': 'Reasoning'
     };
     return subjectNames[subjectId] || subjectId;
   };
@@ -130,177 +130,177 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
   const getTopicDisplayName = (topicId: string) => {
     const topicNames: {[key: string]: string} = {
       // Indian History
-      'indus-valley-civilization': 'सिंधु घाटी सभ्यता',
-      'vedic-civilization': 'वैदिक सभ्यता',
-      'buddhism': 'बौद्ध धर्म',
-      'jainism': 'जैन धर्म',
-      'mauryan-empire': 'मौर्य साम्राज्य',
-      'gupta-empire': 'गुप्त साम्राज्य',
-      'harshavardhan': 'हर्षवर्धन',
-      'rajput-era': 'राजपूत काल',
-      'sultanate-era': 'सल्तनत काल',
-      'mughal-empire': 'मुगल साम्राज्य',
-      'maratha-empire': 'मराठा साम्राज्य',
-      'british-rule-first-war': 'ब्रिटिश शासन और प्रथम स्वतंत्रता संग्राम',
-      'social-economic-impact-british': 'ब्रिटिश शासन का सामाजिक और आर्थिक प्रभाव',
+      'indus-valley-civilization': 'Indus Valley Civilization',
+      'vedic-civilization': 'Vedic Civilization',
+      'buddhism': 'Buddhism',
+      'jainism': 'Jainism',
+      'mauryan-empire': 'Mauryan Empire',
+      'gupta-empire': 'Gupta Empire',
+      'harshavardhan': 'Harshavardhan',
+      'rajput-era': 'Rajput Era',
+      'sultanate-era': 'Sultanate Era',
+      'mughal-empire': 'Mughal Empire',
+      'maratha-empire': 'Maratha Empire',
+      'british-rule-first-war': 'British Rule and First War of Independence',
+      'social-economic-impact-british': 'Social and Economic Impact of British Rule',
       
       // National Movement
-      'early-resistance': 'प्रारंभिक प्रतिरोध',
-      'sepoy-mutiny': 'सिपाही विद्रोह',
-      'congress-formation': 'कांग्रेस की स्थापना',
-      'partition-bengal': 'बंगाल विभाजन',
-      'swadeshi-movement': 'स्वदेशी आंदोलन',
-      'revolutionary-movement': 'क्रांतिकारी आंदोलन',
-      'gandhian-era': 'गांधी युग',
-      'non-cooperation': 'असहयोग आंदोलन',
-      'civil-disobedience': 'सविनय अवज्ञा',
-      'quit-india': 'भारत छोड़ो आंदोलन',
-      'freedom-fighters': 'स्वतंत्रता सेनानी',
-      'independence-partition': 'स्वतंत्रता और विभाजन',
+      'early-resistance': 'Early Resistance',
+      'sepoy-mutiny': 'Sepoy Mutiny',
+      'congress-formation': 'Formation of Congress',
+      'partition-bengal': 'Partition of Bengal',
+      'swadeshi-movement': 'Swadeshi Movement',
+      'revolutionary-movement': 'Revolutionary Movement',
+      'gandhian-era': 'Gandhian Era',
+      'non-cooperation': 'Non-Cooperation Movement',
+      'civil-disobedience': 'Civil Disobedience',
+      'quit-india': 'Quit India Movement',
+      'freedom-fighters': 'Freedom Fighters',
+      'independence-partition': 'Independence and Partition',
       
       // Geography
-      'earth-structure': 'पृथ्वी की संरचना',
-      'landforms': 'भू-आकृतियां',
-      'climate-weather': 'जलवायु और मौसम',
-      'rivers-lakes': 'नदियां और झीलें',
-      'population-settlement': 'जनसंख्या और बसाव',
-      'agriculture': 'कृषि',
-      'industries': 'उद्योग',
-      'transport': 'परिवहन',
-      'indian-physical': 'भारत का भौतिक स्वरूप',
-      'indian-climate': 'भारत की जलवायु',
-      'indian-rivers': 'भारत की नदियां',
-      'world-continents': 'विश्व के महाद्वीप',
+      'earth-structure': 'Earth Structure',
+      'landforms': 'Landforms',
+      'climate-weather': 'Climate and Weather',
+      'rivers-lakes': 'Rivers and Lakes',
+      'population-settlement': 'Population and Settlement',
+      'agriculture': 'Agriculture',
+      'industries': 'Industries',
+      'transport': 'Transport',
+      'indian-physical': 'Physical Features of India',
+      'indian-climate': 'Climate of India',
+      'indian-rivers': 'Rivers of India',
+      'world-continents': 'World Continents',
       
       // Economy
-      'economic-development': 'आर्थिक विकास',
-      'planning-commission': 'योजना आयोग',
-      'five-year-plans': 'पंचवर्षीय योजनाएं',
-      'agriculture-sector': 'कृषि क्षेत्र',
-      'industrial-sector': 'औद्योगिक क्षेत्र',
-      'service-sector': 'सेवा क्षेत्र',
-      'banking-finance': 'बैंकिंग और वित्त',
-      'monetary-policy': 'मौद्रिक नीति',
-      'fiscal-policy': 'राजकोषीय नीति',
-      'trade-commerce': 'व्यापार और वाणिज्य',
-      'economic-reforms': 'आर्थिक सुधार',
-      'current-challenges': 'वर्तमान चुनौतियां',
+      'economic-development': 'Economic Development',
+      'planning-commission': 'Planning Commission',
+      'five-year-plans': 'Five Year Plans',
+      'agriculture-sector': 'Agriculture Sector',
+      'industrial-sector': 'Industrial Sector',
+      'service-sector': 'Service Sector',
+      'banking-finance': 'Banking and Finance',
+      'monetary-policy': 'Monetary Policy',
+      'fiscal-policy': 'Fiscal Policy',
+      'trade-commerce': 'Trade and Commerce',
+      'economic-reforms': 'Economic Reforms',
+      'current-challenges': 'Current Challenges',
       
       // Constitution
-      'making-constitution': 'संविधान निर्माण',
-      'preamble': 'प्रस्तावना',
-      'fundamental-rights': 'मौलिक अधिकार',
-      'fundamental-duties': 'मौलिक कर्तव्य',
-      'directive-principles': 'नीति निदेशक तत्व',
-      'union-government': 'केंद्र सरकार',
-      'parliament': 'संसद',
-      'president': 'राष्ट्रपति',
-      'prime-minister': 'प्रधानमंत्री',
-      'judiciary': 'न्यायपालिका',
-      'supreme-court': 'सर्वोच्च न्यायालय',
-      'state-government': 'राज्य सरकार',
-      'local-government': 'स्थानीय सरकार',
-      'emergency-provisions': 'आपातकालीन प्रावधान',
-      'amendments': 'संशोधन',
+      'making-constitution': 'Making of Constitution',
+      'preamble': 'Preamble',
+      'fundamental-rights': 'Fundamental Rights',
+      'fundamental-duties': 'Fundamental Duties',
+      'directive-principles': 'Directive Principles',
+      'union-government': 'Union Government',
+      'parliament': 'Parliament',
+      'president': 'President',
+      'prime-minister': 'Prime Minister',
+      'judiciary': 'Judiciary',
+      'supreme-court': 'Supreme Court',
+      'state-government': 'State Government',
+      'local-government': 'Local Government',
+      'emergency-provisions': 'Emergency Provisions',
+      'amendments': 'Amendments',
       
       // Science
-      'mechanics': 'यांत्रिकी',
-      'heat-thermodynamics': 'उष्मा और ऊष्मागतिकी',
-      'light-optics': 'प्रकाश और प्रकाशिकी',
-      'electricity': 'विद्युत',
-      'atomic-structure': 'परमाणु संरचना',
-      'periodic-table': 'आवर्त सारणी',
-      'acids-bases': 'अम्ल और क्षार',
-      'metals-nonmetals': 'धातु और अधातु',
-      'cell-biology': 'कोशिका जीव विज्ञान',
-      'human-body': 'मानव शरीर',
-      'plant-biology': 'वनस्पति विज्ञान',
-      'genetics': 'आनुवंशिकता',
-      'ecology-environment': 'पारिस्थितिकी और पर्यावरण',
-      'natural-resources': 'प्राकृतिक संसाधन',
-      'pollution-control': 'प्रदूषण नियंत्रण',
+      'mechanics': 'Mechanics',
+      'heat-thermodynamics': 'Heat and Thermodynamics',
+      'light-optics': 'Light and Optics',
+      'electricity': 'Electricity',
+      'atomic-structure': 'Atomic Structure',
+      'periodic-table': 'Periodic Table',
+      'acids-bases': 'Acids and Bases',
+      'metals-nonmetals': 'Metals and Non-metals',
+      'cell-biology': 'Cell Biology',
+      'human-body': 'Human Body',
+      'plant-biology': 'Plant Biology',
+      'genetics': 'Genetics',
+      'ecology-environment': 'Ecology and Environment',
+      'natural-resources': 'Natural Resources',
+      'pollution-control': 'Pollution Control',
       
       // Hindi
-      'vyakaran-basics': 'व्याकरण मूल बातें',
-      'sandhi': 'संधि',
-      'samas': 'समास',
-      'chhand-alankar': 'छंद और अलंकार',
-      'kavya-sahitya': 'काव्य साहित्य',
-      'katha-sahitya': 'कथा साहित्य',
-      'natak-sahitya': 'नाटक साहित्य',
-      'nibandh-sahitya': 'निबंध साहित्य',
-      'gadyansh': 'गद्यांश',
-      'kavyansh': 'काव्यांश',
-      'patra-lekhan': 'पत्र लेखन',
-      'nibandh-lekhan': 'निबंध लेखन',
+      'vyakaran-basics': 'Grammar Basics',
+      'sandhi': 'Sandhi',
+      'samas': 'Compound Words',
+      'chhand-alankar': 'Meter and Figures of Speech',
+      'kavya-sahitya': 'Poetry Literature',
+      'katha-sahitya': 'Story Literature',
+      'natak-sahitya': 'Drama Literature',
+      'nibandh-sahitya': 'Essay Literature',
+      'gadyansh': 'Prose Passage',
+      'kavyansh': 'Poetry Passage',
+      'patra-lekhan': 'Letter Writing',
+      'nibandh-lekhan': 'Essay Writing',
       
       // English
-      'parts-of-speech': 'शब्द भेद',
-      'tenses': 'काल',
-      'voice-narration': 'वाच्य और कथन',
-      'sentence-structure': 'वाक्य संरचना',
-      'vocabulary-building': 'शब्द भंडार',
-      'synonyms-antonyms': 'समानार्थी और विपरीतार्थी',
-      'idioms-phrases': 'मुहावरे और वाक्यांश',
-      'one-word-substitution': 'एक शब्द प्रतिस्थापन',
-      'reading-comprehension': 'गद्यांश समझ',
-      'cloze-test': 'रिक्त स्थान पूर्ति',
-      'error-correction': 'त्रुटि सुधार',
-      'essay-writing': 'निबंध लेखन',
+      'parts-of-speech': 'Parts of Speech',
+      'tenses': 'Tenses',
+      'voice-narration': 'Voice and Narration',
+      'sentence-structure': 'Sentence Structure',
+      'vocabulary-building': 'Vocabulary Building',
+      'synonyms-antonyms': 'Synonyms and Antonyms',
+      'idioms-phrases': 'Idioms and Phrases',
+      'one-word-substitution': 'One Word Substitution',
+      'reading-comprehension': 'Reading Comprehension',
+      'cloze-test': 'Cloze Test',
+      'error-correction': 'Error Correction',
+      'essay-writing': 'Essay Writing',
       
       // Math
-      'number-system': 'संख्या प्रणाली',
-      'percentage': 'प्रतिशत',
-      'profit-loss': 'लाभ-हानि',
-      'simple-compound-interest': 'साधारण और चक्रवृद्धि ब्याज',
-      'time-work': 'समय और कार्य',
-      'time-distance': 'समय और दूरी',
-      'averages': 'औसत',
-      'ratio-proportion': 'अनुपात और समानुपात',
-      'algebra-basics': 'बीजगणित मूल बातें',
-      'linear-equations': 'रैखिक समीकरण',
-      'geometry-basics': 'ज्यामिति मूल बातें',
-      'mensuration': 'क्षेत्रमिति',
-      'trigonometry': 'त्रिकोणमिति',
-      'statistics-basics': 'सांख्यिकी मूल बातें',
-      'probability': 'प्रायिकता',
-      'data-interpretation': 'डेटा व्याख्या',
+      'number-system': 'Number System',
+      'percentage': 'Percentage',
+      'profit-loss': 'Profit and Loss',
+      'simple-compound-interest': 'Simple and Compound Interest',
+      'time-work': 'Time and Work',
+      'time-distance': 'Time and Distance',
+      'averages': 'Averages',
+      'ratio-proportion': 'Ratio and Proportion',
+      'algebra-basics': 'Algebra Basics',
+      'linear-equations': 'Linear Equations',
+      'geometry-basics': 'Geometry Basics',
+      'mensuration': 'Mensuration',
+      'trigonometry': 'Trigonometry',
+      'statistics-basics': 'Statistics Basics',
+      'probability': 'Probability',
+      'data-interpretation': 'Data Interpretation',
       
       // GK
-      'current-affairs-national': 'राष्ट्रीय समसामयिकी',
-      'current-affairs-international': 'अंतर्राष्ट्रीय समसामयिकी',
-      'government-schemes': 'सरकारी योजनाएं',
-      'awards-honours': 'पुरस्कार और सम्मान',
-      'sports-events': 'खेल घटनाएं',
-      'books-authors': 'पुस्तकें और लेखक',
-      'important-days': 'महत्वपूर्ण दिवस',
-      'organizations': 'संगठन',
-      'capitals-currencies': 'राजधानी और मुद्रा',
-      'indian-states': 'भारतीय राज्य',
-      'world-geography-facts': 'विश्व भूगोल तथ्य',
-      'science-technology': 'विज्ञान और तकनीक',
-      'defence-security': 'रक्षा और सुरक्षा',
-      'economy-finance': 'अर्थव्यवस्था और वित्त',
+      'current-affairs-national': 'National Current Affairs',
+      'current-affairs-international': 'International Current Affairs',
+      'government-schemes': 'Government Schemes',
+      'awards-honours': 'Awards and Honours',
+      'sports-events': 'Sports Events',
+      'books-authors': 'Books and Authors',
+      'important-days': 'Important Days',
+      'organizations': 'Organizations',
+      'capitals-currencies': 'Capitals and Currencies',
+      'indian-states': 'Indian States',
+      'world-geography-facts': 'World Geography Facts',
+      'science-technology': 'Science and Technology',
+      'defence-security': 'Defence and Security',
+      'economy-finance': 'Economy and Finance',
       
       // Reasoning
-      'verbal-analogy': 'शाब्दिक सादृश्य',
-      'classification': 'वर्गीकरण',
-      'series-completion': 'श्रृंखला पूर्ति',
-      'coding-decoding': 'कोडिंग-डिकोडिंग',
-      'blood-relations': 'रक्त संबंध',
-      'direction-distance': 'दिशा और दूरी',
-      'ranking-arrangement': 'क्रम और व्यवस्था',
-      'syllogism': 'न्याय वाक्य',
-      'statement-conclusion': 'कथन और निष्कर्ष',
-      'statement-assumption': 'कथन और पूर्वधारणा',
-      'critical-reasoning': 'आलोचनात्मक तर्क',
-      'puzzles-seating': 'पहेली और बैठक व्यवस्था',
-      'calendar-clock': 'कैलेंडर और घड़ी',
-      'number-series': 'संख्या श्रृंखला',
-      'figure-series': 'आकृति श्रृंखला',
-      'pattern-completion': 'पैटर्न पूर्ति',
-      'mirror-water-images': 'दर्पण और जल प्रतिबिंब',
-      'paper-cutting-folding': 'कागज काटना और मोड़ना'
+      'verbal-analogy': 'Verbal Analogy',
+      'classification': 'Classification',
+      'series-completion': 'Series Completion',
+      'coding-decoding': 'Coding-Decoding',
+      'blood-relations': 'Blood Relations',
+      'direction-distance': 'Direction and Distance',
+      'ranking-arrangement': 'Ranking and Arrangement',
+      'syllogism': 'Syllogism',
+      'statement-conclusion': 'Statement and Conclusion',
+      'statement-assumption': 'Statement and Assumption',
+      'critical-reasoning': 'Critical Reasoning',
+      'puzzles-seating': 'Puzzles and Seating Arrangement',
+      'calendar-clock': 'Calendar and Clock',
+      'number-series': 'Number Series',
+      'figure-series': 'Figure Series',
+      'pattern-completion': 'Pattern Completion',
+      'mirror-water-images': 'Mirror and Water Images',
+      'paper-cutting-folding': 'Paper Cutting and Folding'
     };
     return topicNames[topicId] || topicId;
   };
@@ -308,8 +308,8 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
   const handleUpload = async () => {
     if (!formData.file || !formData.subject || !formData.topicName) {
       toast({
-        title: "अधूरी जानकारी",
-        description: "कृपया सभी फील्ड भरें और फ़ाइल चुनें",
+        title: "Incomplete Information",
+        description: "Please fill all fields and select a file",
         variant: "destructive"
       });
       return;
@@ -346,8 +346,8 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
       if (dbError) throw dbError;
 
       toast({
-        title: "सफलतापूर्वक अपलोड",
-        description: "PDF नोट्स सफलतापूर्वक अपलोड हो गए"
+        title: "Successfully Uploaded",
+        description: "PDF notes uploaded successfully"
       });
 
       // Reset form
@@ -356,8 +356,8 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
     } catch (error) {
       console.error('Upload error:', error);
       toast({
-        title: "अपलोड एरर",
-        description: "PDF अपलोड करने में समस्या हुई",
+        title: "Upload Error",
+        description: "Problem uploading PDF",
         variant: "destructive"
       });
     } finally {
@@ -369,21 +369,21 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-center">एडमिन पैनल - PDF अपलोड</CardTitle>
+          <CardTitle className="text-center">Admin Panel - PDF Upload</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
-            <Label htmlFor="subject">विषय चुनें</Label>
+            <Label htmlFor="subject">Select Subject</Label>
             <Select value={formData.subject} onValueChange={(value) => 
               setFormData(prev => ({ ...prev, subject: value }))}>
               <SelectTrigger>
-                <SelectValue placeholder="विषय चुनें" />
+                <SelectValue placeholder="Select Subject" />
               </SelectTrigger>
               <SelectContent className="bg-background border z-50">
                 {loading ? (
-                  <SelectItem value="loading" disabled>लोड हो रहा है...</SelectItem>
+                  <SelectItem value="loading" disabled>Loading...</SelectItem>
                 ) : existingSubjects.length === 0 ? (
-                  <SelectItem value="no-data" disabled>कोई विषय उपलब्ध नहीं</SelectItem>
+                  <SelectItem value="no-data" disabled>No subjects available</SelectItem>
                 ) : (
                   existingSubjects.map(subject => (
                     <SelectItem key={subject} value={subject} className="hover:bg-accent">
@@ -396,20 +396,20 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
           </div>
 
           <div>
-            <Label htmlFor="topic">टॉपिक चुनें</Label>
+            <Label htmlFor="topic">Select Topic</Label>
             <Select 
               value={formData.topicName} 
               onValueChange={(value) => setFormData(prev => ({ ...prev, topicName: value }))}
               disabled={!formData.subject}
             >
               <SelectTrigger className="bg-background">
-                <SelectValue placeholder="पहले विषय चुनें" />
+                <SelectValue placeholder="Select subject first" />
               </SelectTrigger>
               <SelectContent className="bg-background border z-50">
                 {!formData.subject ? (
-                  <SelectItem value="no-subject" disabled>पहले विषय चुनें</SelectItem>
+                  <SelectItem value="no-subject" disabled>Select subject first</SelectItem>
                 ) : existingTopics[formData.subject]?.length === 0 ? (
-                  <SelectItem value="no-topics" disabled>इस विषय में कोई टॉपिक नहीं</SelectItem>
+                  <SelectItem value="no-topics" disabled>No topics in this subject</SelectItem>
                 ) : (
                   existingTopics[formData.subject]?.map(topic => (
                     <SelectItem key={topic} value={topic} className="hover:bg-accent">
@@ -422,7 +422,7 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
           </div>
 
           <div>
-            <Label htmlFor="file">PDF फ़ाइल चुनें</Label>
+            <Label htmlFor="file">Select PDF File</Label>
             <Input
               type="file"
               accept=".pdf"
@@ -440,17 +440,17 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
               {uploading ? (
                 <>
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  अपलोड हो रहा है...
+                  Uploading...
                 </>
               ) : (
                 <>
                   <Upload className="h-4 w-4 mr-2" />
-                  अपलोड करें
+                  Upload
                 </>
               )}
             </Button>
             <Button variant="outline" onClick={onClose}>
-              बंद करें
+              Close
             </Button>
           </div>
         </CardContent>
