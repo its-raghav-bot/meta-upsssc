@@ -35,7 +35,7 @@ const Index = () => {
   } = useNotesData();
 
   const [navigation, setNavigation] = useState<NavigationState>({
-    view: 'home'
+    view: 'subjects'
   });
   
   const [searchQuery, setSearchQuery] = useState("");
@@ -77,19 +77,17 @@ const Index = () => {
     setNavigation({ view: 'subjects' });
   };
 
-  const navigateToChapters = (subject: Subject) => {
+  // Skip chapters, go directly to topics
+  const navigateToTopics = (subject: Subject) => {
+    // Get all topics from all chapters in the subject
+    const allTopics = subject.chapters.flatMap(chapter => chapter.topics);
+    const firstChapter = subject.chapters[0]; // Use first chapter as container
+    
     setNavigation({ 
-      view: 'chapters',
-      currentSubject: subject 
-    });
-  };
-
-  const navigateToTopics = (chapter: Chapter) => {
-    setNavigation(prev => ({
       view: 'topics',
-      currentSubject: prev.currentSubject,
-      currentChapter: chapter
-    }));
+      currentSubject: subject,
+      currentChapter: { ...firstChapter, topics: allTopics }
+    });
   };
 
   const navigateToContent = (topic: Topic) => {
@@ -104,28 +102,20 @@ const Index = () => {
 
   const navigateBack = () => {
     switch (navigation.view) {
-      case 'subjects':
-        navigateHome();
-        break;
-      case 'chapters':
+      case 'topics':
         navigateToSubjects();
         break;
-      case 'topics':
-        if (navigation.currentSubject) {
-          navigateToChapters(navigation.currentSubject);
-        }
-        break;
       case 'content':
-        if (navigation.currentChapter) {
-          navigateToTopics(navigation.currentChapter);
+        if (navigation.currentSubject) {
+          navigateToTopics(navigation.currentSubject);
         }
         break;
       case 'search':
       case 'progress':
-        navigateHome();
+        navigateToSubjects();
         break;
       default:
-        navigateHome();
+        navigateToSubjects();
     }
   };
 
@@ -138,7 +128,7 @@ const Index = () => {
     } else {
       setSearchResults([]);
       if (navigation.view === 'search') {
-        navigateHome();
+        navigateToSubjects();
       }
     }
   };
@@ -153,10 +143,8 @@ const Index = () => {
     switch (navigation.view) {
       case 'subjects':
         return 'सभी विषय';
-      case 'chapters':
-        return navigation.currentSubject?.name || 'अध्याय';
       case 'topics':
-        return navigation.currentChapter?.name || 'विषय';
+        return navigation.currentSubject?.name || 'विषय';
       case 'content':
         return navigation.currentTopic?.name || 'नोट्स';
       case 'search':
@@ -218,24 +206,16 @@ const Index = () => {
 
       case 'subjects':
         return (
-          <div className="space-y-4">
+          <div className="grid grid-cols-2 gap-3 max-h-[calc(100vh-200px)] overflow-y-auto">
             {subjects.map(subject => (
               <SubjectCard
                 key={subject.id}
                 subject={subject}
-                onClick={() => navigateToChapters(subject)}
+                onClick={() => navigateToTopics(subject)}
               />
             ))}
           </div>
         );
-
-      case 'chapters':
-        return navigation.currentSubject ? (
-          <ChapterList 
-            chapters={navigation.currentSubject.chapters}
-            onChapterClick={navigateToTopics}
-          />
-        ) : null;
 
       case 'topics':
         return navigation.currentChapter ? (
@@ -303,8 +283,8 @@ const Index = () => {
             isDark={isDark}
             onThemeToggle={toggleTheme}
             title={getPageTitle()}
-            showBackButton={navigation.view !== 'home'}
-            onBack={navigation.view !== 'home' ? navigateBack : undefined}
+            showBackButton={navigation.view !== 'subjects'}
+            onBack={navigation.view !== 'subjects' ? navigateBack : undefined}
           />
           
           <div className="p-4 space-y-6">
@@ -316,10 +296,6 @@ const Index = () => {
               <div className="p-4 bg-background/95 backdrop-blur-sm border-t border-border">
                 <Card className="p-3 mx-auto max-w-md shadow-lg">
                   <div className="flex items-center justify-around">
-                    <Button variant="ghost" size="sm" onClick={navigateHome} className="flex-col gap-1 tap-target">
-                      <Home className="w-4 h-4" />
-                      <span className="text-xs">होम</span>
-                    </Button>
                     <Button variant="ghost" size="sm" onClick={navigateToSubjects} className="flex-col gap-1 tap-target">
                       <Search className="w-4 h-4" />
                       <span className="text-xs">विषय</span>

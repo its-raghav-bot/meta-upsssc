@@ -41,16 +41,11 @@ export const TopicList = ({ topics, onTopicClick }: TopicListProps) => {
                   )}
                 </div>
                 
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <FileText className="w-3 h-3" />
-                  <span>{topic.type === 'pdf' ? 'PDF फाइल' : 'टेक्स्ट नोट्स'}</span>
-                  {topic.lastRead && (
-                    <>
-                      <span>•</span>
-                      <span>पिछली बार पढ़ा: {new Date(topic.lastRead).toLocaleDateString('hi-IN')}</span>
-                    </>
-                  )}
-                </div>
+                {topic.lastRead && (
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <span>पिछली बार पढ़ा: {new Date(topic.lastRead).toLocaleDateString('hi-IN')}</span>
+                  </div>
+                )}
               </div>
               
               <div className="flex-shrink-0">
