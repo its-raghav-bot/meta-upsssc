@@ -27,7 +27,12 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
   ];
 
   const predefinedTopics: {[key: string]: string[]} = {
-    'indian-history': ['ancient-india', 'medieval-india', 'modern-india', 'art-culture'],
+    'indian-history': [
+      'indus-valley-civilization', 'vedic-civilization', 'buddhism', 'jainism',
+      'mauryan-empire', 'gupta-empire', 'harshavardhan', 'rajput-era',
+      'sultanate-era', 'mughal-empire', 'maratha-empire', 'british-rule-first-war',
+      'social-economic-impact-british'
+    ],
     'national-movement': ['freedom-struggle', 'leaders', 'movements', 'independence'],
     'geography': ['physical-geography', 'human-geography', 'indian-geography', 'world-geography'],
     'indian-economy': ['economic-planning', 'sectors', 'policies', 'current-issues'],
@@ -79,10 +84,19 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
   const getTopicDisplayName = (topicId: string) => {
     const topicNames: {[key: string]: string} = {
       // Indian History
-      'ancient-india': 'प्राचीन भारत',
-      'medieval-india': 'मध्यकालीन भारत', 
-      'modern-india': 'आधुनिक भारत',
-      'art-culture': 'कला और संस्कृति',
+      'indus-valley-civilization': 'सिंधु घाटी सभ्यता',
+      'vedic-civilization': 'वैदिक सभ्यता',
+      'buddhism': 'बौद्ध धर्म',
+      'jainism': 'जैन धर्म',
+      'mauryan-empire': 'मौर्य साम्राज्य',
+      'gupta-empire': 'गुप्त साम्राज्य',
+      'harshavardhan': 'हर्षवर्धन',
+      'rajput-era': 'राजपूत काल',
+      'sultanate-era': 'सल्तनत काल',
+      'mughal-empire': 'मुगल साम्राज्य',
+      'maratha-empire': 'मराठा साम्राज्य',
+      'british-rule-first-war': 'ब्रिटिश शासन और प्रथम स्वतंत्रता संग्राम',
+      'social-economic-impact-british': 'ब्रिटिश शासन का सामाजिक और आर्थिक प्रभाव',
       
       // National Movement
       'freedom-struggle': 'स्वतंत्रता संग्राम',
