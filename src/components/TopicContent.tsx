@@ -28,34 +28,11 @@ export const TopicContent = ({ topic, onBack, onToggleComplete }: TopicContentPr
       note.title.toLowerCase() === topic.name.toLowerCase()
     );
     
-    if (matchingPdfNote) {
-      // We need to get the actual filename from the storage path
-      // Since we only store metadata in notes table, we need to query storage directly
-      // For now, let's try to construct a URL and let the download handle any errors
-      console.log('Found matching PDF note:', matchingPdfNote);
-      
-      // Try to fetch the actual file from storage
-      supabase.storage
-        .from('pdfs')
-        .list(matchingPdfNote.subject_id, { limit: 100 })
-        .then(({ data: files, error }) => {
-          if (error) {
-            console.error('Error listing files:', error);
-            return;
-          }
-          
-          // Find a file that might match this topic
-          const matchingFile = files?.find(file => 
-            file.name.toLowerCase().includes(matchingPdfNote.topic_id.toLowerCase()) ||
-            file.name.toLowerCase().includes(topic.name.toLowerCase().replace(/\s+/g, '-'))
-          );
-          
-          if (matchingFile) {
-            const url = getPdfUrl(matchingPdfNote.subject_id, '', matchingFile.name);
-            setPdfUrl(url);
-            console.log('Set PDF URL:', url);
-          }
-        });
+    if (matchingPdfNote && matchingPdfNote.file_path) {
+      // Use the stored file path directly
+      const url = getPdfUrl(matchingPdfNote.file_path);
+      setPdfUrl(url);
+      console.log('Found PDF with file path:', matchingPdfNote.file_path, 'URL:', url);
     }
   }, [pdfNotes, topic.id, topic.name, getPdfUrl]);
 

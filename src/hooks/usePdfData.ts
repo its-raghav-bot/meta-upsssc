@@ -8,6 +8,7 @@ interface PdfNote {
   chapter_id: string;
   topic_id: string;
   content: string;
+  file_path?: string; // Add the file_path field
   created_at: string;
   updated_at: string;
 }
@@ -36,9 +37,8 @@ export const usePdfData = () => {
     fetchPdfNotes();
   }, []);
 
-  const getPdfUrl = (subject: string, chapter: string, fileName: string) => {
-    // Files are uploaded to subject/filename format, not subject/chapter/filename
-    const filePath = `${subject}/${fileName}`;
+  const getPdfUrl = (filePath: string) => {
+    // Use the stored file path directly
     const { data } = supabase.storage
       .from('pdfs')
       .getPublicUrl(filePath);
@@ -49,6 +49,9 @@ export const usePdfData = () => {
   const downloadPdf = async (pdfUrl: string, fileName: string) => {
     try {
       const response = await fetch(pdfUrl);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const blob = await response.blob();
       
       // Create download link

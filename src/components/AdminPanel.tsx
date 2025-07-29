@@ -340,6 +340,7 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
           topic_id: formData.topicName,
           title: topicTitle,
           content: `PDF Document: ${topicTitle}`,
+          file_path: filePath, // Store the actual file path
           user_id: '00000000-0000-0000-0000-000000000000'
         });
 

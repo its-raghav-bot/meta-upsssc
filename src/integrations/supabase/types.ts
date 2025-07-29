@@ -19,6 +19,7 @@ export type Database = {
           chapter_id: string
           content: string
           created_at: string
+          file_path: string | null
           id: string
           is_completed: boolean | null
           last_read: string | null
@@ -32,6 +33,7 @@ export type Database = {
           chapter_id: string
           content: string
           created_at?: string
+          file_path?: string | null
           id?: string
           is_completed?: boolean | null
           last_read?: string | null
@@ -45,6 +47,7 @@ export type Database = {
           chapter_id?: string
           content?: string
           created_at?: string
+          file_path?: string | null
           id?: string
           is_completed?: boolean | null
           last_read?: string | null
