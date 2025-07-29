@@ -8,17 +8,11 @@ export const useNotesData = () => {
 
   // Load data from localStorage on mount
   useEffect(() => {
-    const savedSubjects = localStorage.getItem('pet-gyan-subjects');
+    // Always use the latest subjects data instead of localStorage for now
+    // This ensures the new curriculum structure is loaded
+    setSubjects(initialSubjects);
+    
     const savedTheme = localStorage.getItem('pet-gyan-theme');
-    
-    if (savedSubjects) {
-      try {
-        setSubjects(JSON.parse(savedSubjects));
-      } catch (error) {
-        console.error('Error loading saved subjects:', error);
-      }
-    }
-    
     if (savedTheme) {
       setIsDark(savedTheme === 'dark');
     }
