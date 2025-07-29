@@ -286,27 +286,29 @@ const Index = () => {
             <SearchBar onSearch={handleSearch} />
             
             {/* Bottom Navigation - Always visible */}
-            <div className="fixed bottom-4 left-4 right-4 z-10">
-              <Card className="p-3">
-                <div className="flex items-center justify-around">
-                  <Button variant="ghost" size="sm" onClick={navigateHome} className="flex-col gap-1">
-                    <Home className="w-4 h-4" />
-                    <span className="text-xs">होम</span>
-                  </Button>
-                  <Button variant="ghost" size="sm" onClick={navigateToSubjects} className="flex-col gap-1">
-                    <Search className="w-4 h-4" />
-                    <span className="text-xs">विषय</span>
-                  </Button>
-                  <Button variant="ghost" size="sm" onClick={navigateToProgress} className="flex-col gap-1">
-                    <BarChart3 className="w-4 h-4" />
-                    <span className="text-xs">प्रगति</span>
-                  </Button>
-                </div>
-              </Card>
+            <div className="bottom-nav-container">
+              <div className="p-4 bg-background/95 backdrop-blur-sm border-t border-border">
+                <Card className="p-3 mx-auto max-w-md shadow-lg">
+                  <div className="flex items-center justify-around">
+                    <Button variant="ghost" size="sm" onClick={navigateHome} className="flex-col gap-1 tap-target">
+                      <Home className="w-4 h-4" />
+                      <span className="text-xs">होम</span>
+                    </Button>
+                    <Button variant="ghost" size="sm" onClick={navigateToSubjects} className="flex-col gap-1 tap-target">
+                      <Search className="w-4 h-4" />
+                      <span className="text-xs">विषय</span>
+                    </Button>
+                    <Button variant="ghost" size="sm" onClick={navigateToProgress} className="flex-col gap-1 tap-target">
+                      <BarChart3 className="w-4 h-4" />
+                      <span className="text-xs">प्रगति</span>
+                    </Button>
+                  </div>
+                </Card>
+              </div>
             </div>
             
             {/* Main Content */}
-            <div className="pb-24">
+            <div className="main-content-with-nav">
               {renderContent()}
             </div>
           </div>

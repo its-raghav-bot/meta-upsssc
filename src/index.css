@@ -175,9 +175,9 @@
   /* Safe area insets for newer Android devices */
   body {
     padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
+    /* Don't add bottom padding to body to avoid conflicts with fixed bottom nav */
   }
 
   /* Performance optimizations for older Android */
@@ -196,5 +196,21 @@
   html {
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
+  }
+
+  /* Bottom navigation fixes for Android */
+  .bottom-nav-container {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 9999 !important;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    transform: translateZ(0); /* Force hardware acceleration */
+  }
+
+  /* Prevent content from interfering with bottom nav */
+  .main-content-with-nav {
+    padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px)) !important;
   }
 }
