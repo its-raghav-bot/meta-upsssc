@@ -19,49 +19,32 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
     topicName: '',
     file: null as File | null
   });
-  const [existingSubjects, setExistingSubjects] = useState<string[]>([]);
-  const [existingTopics, setExistingTopics] = useState<{[key: string]: string[]}>({});
-  const [loading, setLoading] = useState(true);
+  // Predefined subjects and topics
+  const predefinedSubjects = [
+    'indian-history', 'national-movement', 'geography', 'indian-economy', 
+    'constitution', 'general-science', 'hindi', 'english', 'mathematics', 
+    'general-awareness', 'reasoning'
+  ];
+
+  const predefinedTopics: {[key: string]: string[]} = {
+    'indian-history': ['ancient-india', 'medieval-india', 'modern-india', 'art-culture'],
+    'national-movement': ['freedom-struggle', 'leaders', 'movements', 'independence'],
+    'geography': ['physical-geography', 'human-geography', 'indian-geography', 'world-geography'],
+    'indian-economy': ['economic-planning', 'sectors', 'policies', 'current-issues'],
+    'constitution': ['fundamental-rights', 'directive-principles', 'parliament', 'judiciary'],
+    'general-science': ['physics', 'chemistry', 'biology', 'environmental-science'],
+    'hindi': ['grammar', 'literature', 'comprehension', 'writing'],
+    'english': ['grammar', 'vocabulary', 'comprehension', 'writing'],
+    'mathematics': ['arithmetic', 'algebra', 'geometry', 'statistics'],
+    'general-awareness': ['current-affairs', 'static-gk', 'important-dates', 'awards'],
+    'reasoning': ['logical-reasoning', 'analytical-reasoning', 'verbal-reasoning', 'non-verbal-reasoning']
+  };
+
+  const [existingSubjects, setExistingSubjects] = useState<string[]>(predefinedSubjects);
+  const [existingTopics, setExistingTopics] = useState<{[key: string]: string[]}>(predefinedTopics);
+  const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
-  useEffect(() => {
-    fetchExistingData();
-  }, []);
-
-  const fetchExistingData = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('notes')
-        .select('subject_id, topic_id, title');
-      
-      if (error) throw error;
-
-      const subjects = new Set<string>();
-      const topicsBySubject: {[key: string]: string[]} = {};
-
-      data?.forEach(note => {
-        subjects.add(note.subject_id);
-        if (!topicsBySubject[note.subject_id]) {
-          topicsBySubject[note.subject_id] = [];
-        }
-        if (!topicsBySubject[note.subject_id].includes(note.topic_id)) {
-          topicsBySubject[note.subject_id].push(note.topic_id);
-        }
-      });
-
-      setExistingSubjects(Array.from(subjects));
-      setExistingTopics(topicsBySubject);
-    } catch (error) {
-      console.error('Error fetching existing data:', error);
-      toast({
-        title: "डेटा लोड एरर",
-        description: "मौजूदा विषय और टॉपिक लोड नहीं हो सके",
-        variant: "destructive"
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -93,21 +76,70 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
     return subjectNames[subjectId] || subjectId;
   };
 
-  const getTopicDisplayName = async (topicId: string, subjectId: string) => {
-    try {
-      const { data, error } = await supabase
-        .from('notes')
-        .select('title')
-        .eq('topic_id', topicId)
-        .eq('subject_id', subjectId)
-        .limit(1);
+  const getTopicDisplayName = (topicId: string) => {
+    const topicNames: {[key: string]: string} = {
+      // Indian History
+      'ancient-india': 'प्राचीन भारत',
+      'medieval-india': 'मध्यकालीन भारत', 
+      'modern-india': 'आधुनिक भारत',
+      'art-culture': 'कला और संस्कृति',
       
-      if (error) throw error;
-      return data?.[0]?.title || topicId;
-    } catch (error) {
-      console.error('Error fetching topic name:', error);
-      return topicId;
-    }
+      // National Movement
+      'freedom-struggle': 'स्वतंत्रता संग्राम',
+      'leaders': 'नेता',
+      'movements': 'आंदोलन',
+      'independence': 'स्वतंत्रता',
+      
+      // Geography
+      'physical-geography': 'भौतिक भूगोल',
+      'human-geography': 'मानव भूगोल',
+      'indian-geography': 'भारतीय भूगोल',
+      'world-geography': 'विश्व भूगोल',
+      
+      // Economy
+      'economic-planning': 'आर्थिक योजना',
+      'sectors': 'क्षेत्र',
+      'policies': 'नीतियां',
+      'current-issues': 'वर्तमान मुद्दे',
+      
+      // Constitution
+      'fundamental-rights': 'मौलिक अधिकार',
+      'directive-principles': 'नीति निदेशक तत्व',
+      'parliament': 'संसद',
+      'judiciary': 'न्यायपालिका',
+      
+      // Science
+      'physics': 'भौतिकी',
+      'chemistry': 'रसायन विज्ञान',
+      'biology': 'जीव विज्ञान',
+      'environmental-science': 'पर्यावरण विज्ञान',
+      
+      // Languages
+      'grammar': 'व्याकरण',
+      'literature': 'साहित्य',
+      'comprehension': 'गद्यांश',
+      'writing': 'लेखन',
+      'vocabulary': 'शब्दावली',
+      
+      // Math
+      'arithmetic': 'अंकगणित',
+      'algebra': 'बीजगणित', 
+      'geometry': 'ज्यामिति',
+      'statistics': 'सांख्यिकी',
+      
+      // GK
+      'current-affairs': 'समसामयिकी',
+      'static-gk': 'स्थिर सामान्य ज्ञान',
+      'important-dates': 'महत्वपूर्ण तिथियां',
+      'awards': 'पुरस्कार',
+      
+      // Reasoning
+      'logical-reasoning': 'तार्किक तर्कशक्ति',
+      'analytical-reasoning': 'विश्लेषणात्मक तर्कशक्ति',
+      'verbal-reasoning': 'मौखिक तर्कशक्ति',
+      'non-verbal-reasoning': 'अमौखिक तर्कशक्ति'
+    };
+    return topicNames[topicId] || topicId;
   };
 
   const handleUpload = async () => {
@@ -133,8 +165,8 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
 
       if (uploadError) throw uploadError;
 
-      // Get existing topic title
-      const topicTitle = await getTopicDisplayName(formData.topicName, formData.subject);
+      // Get topic title
+      const topicTitle = getTopicDisplayName(formData.topicName);
 
       // Save metadata to Supabase database
       const { error: dbError } = await supabase
@@ -218,7 +250,7 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
                 ) : (
                   existingTopics[formData.subject]?.map(topic => (
                     <SelectItem key={topic} value={topic} className="hover:bg-accent">
-                      {topic}
+                      {getTopicDisplayName(topic)}
                     </SelectItem>
                   ))
                 )}
