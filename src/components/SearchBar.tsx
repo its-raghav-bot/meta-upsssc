@@ -16,16 +16,21 @@ export const SearchBar = ({ onSearch, placeholder = "नोट्स खोज�
   const containerRef = useRef<HTMLDivElement>(null);
 
   const popularTopics = [
-    "संविधान की मुख्य विशेषताएं",
-    "मौर्य साम्राज्य",
-    "भारत की नदियां",
-    "स्वतंत्रता संग्राम",
-    "भारतीय अर्थव्यवस्था",
-    "सामान्य विज्ञान",
-    "गणित के सूत्र",
-    "हिंदी व्याकरण",
-    "भूगोल के तथ्य",
-    "तर्क और रीजनिंग"
+    "Constitution की main features",
+    "Mauryan Empire का history",
+    "India ki rivers और geography", 
+    "Freedom struggle aur national movement",
+    "Indian economy ke basics",
+    "General science concepts",
+    "Math formulas और tricks",
+    "Hindi grammar rules",
+    "Geography facts aur maps",
+    "Reasoning और logical thinking",
+    "Ancient civilization ka overview",
+    "Mughal empire ke rulers",
+    "Climate change aur environment",
+    "Banking system in India",
+    "Political science basics"
   ];
 
   useEffect(() => {

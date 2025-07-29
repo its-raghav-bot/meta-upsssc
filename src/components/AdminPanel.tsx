@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -19,59 +19,48 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
     topicName: '',
     file: null as File | null
   });
+  const [existingSubjects, setExistingSubjects] = useState<string[]>([]);
+  const [existingTopics, setExistingTopics] = useState<{[key: string]: string[]}>({});
+  const [loading, setLoading] = useState(true);
   const { toast } = useToast();
 
-  const subjects = [
-    'indian-history', 'national-movement', 'geography', 
-    'indian-economy', 'constitution', 'general-science',
-    'hindi', 'english', 'mathematics', 'general-awareness', 'reasoning'
-  ];
+  useEffect(() => {
+    fetchExistingData();
+  }, []);
 
-  const topicsBySubject = {
-    'indian-history': [
-      'ancient-civilization', 'mauryan-empire', 'gupta-period', 'medieval-period', 
-      'mughal-empire', 'maratha-empire', 'regional-kingdoms'
-    ],
-    'national-movement': [
-      'early-nationalism', 'partition-bengal', 'swadeshi-movement', 'revolutionary-movement',
-      'gandhi-era', 'civil-disobedience', 'quit-india', 'independence-partition'
-    ],
-    'geography': [
-      'physical-geography', 'climate-weather', 'rivers-lakes', 'mountains-plateaus',
-      'soils-agriculture', 'minerals-resources', 'population-settlements'
-    ],
-    'indian-economy': [
-      'economic-planning', 'agriculture-sector', 'industrial-sector', 'service-sector',
-      'banking-finance', 'trade-commerce', 'budget-taxation'
-    ],
-    'constitution': [
-      'making-constitution', 'fundamental-rights', 'directive-principles', 'federal-structure',
-      'parliament-functions', 'executive-powers', 'judiciary-system'
-    ],
-    'general-science': [
-      'physics-basics', 'chemistry-basics', 'biology-basics', 'environmental-science',
-      'space-technology', 'computer-science', 'medical-science'
-    ],
-    'hindi': [
-      'grammar-basics', 'literature-poetry', 'essay-writing', 'comprehension',
-      'letter-writing', 'vocabulary', 'pronunciation'
-    ],
-    'english': [
-      'grammar-rules', 'vocabulary-building', 'reading-comprehension', 'essay-writing',
-      'letter-formats', 'spoken-english', 'literature'
-    ],
-    'mathematics': [
-      'arithmetic', 'algebra', 'geometry', 'trigonometry',
-      'statistics', 'probability', 'calculus-basics'
-    ],
-    'general-awareness': [
-      'current-affairs', 'sports-games', 'awards-honors', 'books-authors',
-      'international-events', 'national-events', 'science-discoveries'
-    ],
-    'reasoning': [
-      'logical-reasoning', 'analytical-reasoning', 'verbal-reasoning', 'non-verbal-reasoning',
-      'data-interpretation', 'puzzles-games', 'series-patterns'
-    ]
+  const fetchExistingData = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('notes')
+        .select('subject_id, topic_id, title');
+      
+      if (error) throw error;
+
+      const subjects = new Set<string>();
+      const topicsBySubject: {[key: string]: string[]} = {};
+
+      data?.forEach(note => {
+        subjects.add(note.subject_id);
+        if (!topicsBySubject[note.subject_id]) {
+          topicsBySubject[note.subject_id] = [];
+        }
+        if (!topicsBySubject[note.subject_id].includes(note.topic_id)) {
+          topicsBySubject[note.subject_id].push(note.topic_id);
+        }
+      });
+
+      setExistingSubjects(Array.from(subjects));
+      setExistingTopics(topicsBySubject);
+    } catch (error) {
+      console.error('Error fetching existing data:', error);
+      toast({
+        title: "डेटा लोड एरर",
+        description: "मौजूदा विषय और टॉपिक लोड नहीं हो सके",
+        variant: "destructive"
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -87,32 +76,38 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
     }
   };
 
-  const getTopicDisplayName = (topicId: string) => {
-    const topicNames = {
-      'ancient-civilization': 'प्राचीन सभ्यता',
-      'mauryan-empire': 'मौर्य साम्राज्य',
-      'gupta-period': 'गुप्त काल',
-      'medieval-period': 'मध्यकालीन भारत',
-      'mughal-empire': 'मुगल साम्राज्य',
-      'maratha-empire': 'मराठा साम्राज्य',
-      'regional-kingdoms': 'क्षेत्रीय राज्य',
-      'early-nationalism': 'प्रारंभिक राष्ट्रवाद',
-      'partition-bengal': 'बंगाल विभाजन',
-      'swadeshi-movement': 'स्वदेशी आंदोलन',
-      'revolutionary-movement': 'क्रांतिकारी आंदोलन',
-      'gandhi-era': 'गांधी युग',
-      'civil-disobedience': 'सविनय अवज्ञा',
-      'quit-india': 'भारत छोड़ो',
-      'independence-partition': 'स्वतंत्रता और विभाजन',
-      'physical-geography': 'भौतिक भूगोल',
-      'climate-weather': 'जलवायु और मौसम',
-      'rivers-lakes': 'नदियां और झीलें',
-      'mountains-plateaus': 'पर्वत और पठार',
-      'soils-agriculture': 'मिट्टी और कृषि',
-      'minerals-resources': 'खनिज और संसाधन',
-      'population-settlements': 'जनसंख्या और बस्तियां'
+  const getSubjectDisplayName = (subjectId: string) => {
+    const subjectNames: {[key: string]: string} = {
+      'indian-history': 'भारतीय इतिहास',
+      'national-movement': 'राष्ट्रीय आंदोलन',
+      'geography': 'भूगोल',
+      'indian-economy': 'भारतीय अर्थव्यवस्था',
+      'constitution': 'संविधान',
+      'general-science': 'सामान्य विज्ञान',
+      'hindi': 'हिंदी',
+      'english': 'अंग्रेजी',
+      'mathematics': 'गणित',
+      'general-awareness': 'सामान्य जागरूकता',
+      'reasoning': 'तर्कशक्ति'
     };
-    return topicNames[topicId] || topicId;
+    return subjectNames[subjectId] || subjectId;
+  };
+
+  const getTopicDisplayName = async (topicId: string, subjectId: string) => {
+    try {
+      const { data, error } = await supabase
+        .from('notes')
+        .select('title')
+        .eq('topic_id', topicId)
+        .eq('subject_id', subjectId)
+        .limit(1);
+      
+      if (error) throw error;
+      return data?.[0]?.title || topicId;
+    } catch (error) {
+      console.error('Error fetching topic name:', error);
+      return topicId;
+    }
   };
 
   const handleUpload = async () => {
@@ -138,6 +133,9 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
 
       if (uploadError) throw uploadError;
 
+      // Get existing topic title
+      const topicTitle = await getTopicDisplayName(formData.topicName, formData.subject);
+
       // Save metadata to Supabase database
       const { error: dbError } = await supabase
         .from('notes')
@@ -145,8 +143,8 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
           subject_id: formData.subject,
           chapter_id: formData.topicName,
           topic_id: formData.topicName,
-          title: getTopicDisplayName(formData.topicName),
-          content: `PDF Document: ${getTopicDisplayName(formData.topicName)}`,
+          title: topicTitle,
+          content: `PDF Document: ${topicTitle}`,
           user_id: '00000000-0000-0000-0000-000000000000'
         });
 
@@ -186,12 +184,18 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
               <SelectTrigger>
                 <SelectValue placeholder="विषय चुनें" />
               </SelectTrigger>
-              <SelectContent>
-                {subjects.map(subject => (
-                  <SelectItem key={subject} value={subject}>
-                    {subject.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
-                  </SelectItem>
-                ))}
+              <SelectContent className="bg-background border z-50">
+                {loading ? (
+                  <SelectItem value="loading" disabled>लोड हो रहा है...</SelectItem>
+                ) : existingSubjects.length === 0 ? (
+                  <SelectItem value="no-data" disabled>कोई विषय उपलब्ध नहीं</SelectItem>
+                ) : (
+                  existingSubjects.map(subject => (
+                    <SelectItem key={subject} value={subject} className="hover:bg-accent">
+                      {getSubjectDisplayName(subject)}
+                    </SelectItem>
+                  ))
+                )}
               </SelectContent>
             </Select>
           </div>
@@ -207,11 +211,17 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
                 <SelectValue placeholder="पहले विषय चुनें" />
               </SelectTrigger>
               <SelectContent className="bg-background border z-50">
-                {formData.subject && topicsBySubject[formData.subject]?.map(topic => (
-                  <SelectItem key={topic} value={topic} className="hover:bg-accent">
-                    {getTopicDisplayName(topic)}
-                  </SelectItem>
-                ))}
+                {!formData.subject ? (
+                  <SelectItem value="no-subject" disabled>पहले विषय चुनें</SelectItem>
+                ) : existingTopics[formData.subject]?.length === 0 ? (
+                  <SelectItem value="no-topics" disabled>इस विषय में कोई टॉपिक नहीं</SelectItem>
+                ) : (
+                  existingTopics[formData.subject]?.map(topic => (
+                    <SelectItem key={topic} value={topic} className="hover:bg-accent">
+                      {topic}
+                    </SelectItem>
+                  ))
+                )}
               </SelectContent>
             </Select>
           </div>
