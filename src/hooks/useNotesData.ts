@@ -63,21 +63,6 @@ export const useNotesData = () => {
     );
   };
 
-  const toggleTopicBookmark = (topicId: string) => {
-    setSubjects(prevSubjects => 
-      prevSubjects.map(subject => ({
-        ...subject,
-        chapters: subject.chapters.map(chapter => ({
-          ...chapter,
-          topics: chapter.topics.map(topic => 
-            topic.id === topicId 
-              ? { ...topic, bookmark: !topic.bookmark }
-              : topic
-          )
-        }))
-      }))
-    );
-  };
 
   const updateTopicLastRead = (topicId: string) => {
     setSubjects(prevSubjects => 
@@ -145,19 +130,6 @@ export const useNotesData = () => {
       .slice(0, limit);
   };
 
-  const getBookmarkedTopics = (): Topic[] => {
-    const bookmarked: Topic[] = [];
-    subjects.forEach(subject => {
-      subject.chapters.forEach(chapter => {
-        chapter.topics.forEach(topic => {
-          if (topic.bookmark) {
-            bookmarked.push(topic);
-          }
-        });
-      });
-    });
-    return bookmarked;
-  };
 
   const getSubjectById = (subjectId: string) => {
     return subjects.find(subject => subject.id === subjectId);
@@ -186,11 +158,9 @@ export const useNotesData = () => {
     isDark,
     toggleTheme,
     toggleTopicComplete,
-    toggleTopicBookmark,
     updateTopicLastRead,
     searchTopics,
     getRecentTopics,
-    getBookmarkedTopics,
     getSubjectById,
     getChapterById,
     getTopicById

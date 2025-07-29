@@ -1,8 +1,6 @@
-import { Moon, Sun, Menu, Settings, Shield } from "lucide-react";
+import { Moon, Sun, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { AdminPanel } from "@/components/AdminPanel";
-import { useState } from "react";
 
 interface HeaderProps {
   isDark: boolean;
@@ -21,7 +19,6 @@ export const Header = ({
   showBackButton = false,
   onBack 
 }: HeaderProps) => {
-  const [showAdminPanel, setShowAdminPanel] = useState(false);
   return (
     <header className="sticky top-0 z-20 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="flex items-center justify-between p-4">
@@ -60,20 +57,9 @@ export const Header = ({
             )}
           </Button>
           
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            onClick={() => setShowAdminPanel(true)}
-            className="p-2"
-          >
-            <Shield className="w-4 h-4" />
-          </Button>
         </div>
       </div>
       
-      {showAdminPanel && (
-        <AdminPanel onClose={() => setShowAdminPanel(false)} />
-      )}
     </header>
   );
 };

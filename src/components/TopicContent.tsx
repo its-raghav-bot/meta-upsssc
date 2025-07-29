@@ -2,17 +2,16 @@ import { useState } from "react";
 import { Topic } from "@/types/notes";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, CheckCircle2, Circle, Bookmark, BookmarkCheck, RotateCcw } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Circle, RotateCcw } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 interface TopicContentProps {
   topic: Topic;
   onBack: () => void;
   onToggleComplete: (topicId: string) => void;
-  onToggleBookmark: (topicId: string) => void;
 }
 
-export const TopicContent = ({ topic, onBack, onToggleComplete, onToggleBookmark }: TopicContentProps) => {
+export const TopicContent = ({ topic, onBack, onToggleComplete }: TopicContentProps) => {
   const [fontSize, setFontSize] = useState(16);
 
   const increaseFontSize = () => setFontSize(prev => Math.min(prev + 2, 24));
@@ -53,18 +52,6 @@ export const TopicContent = ({ topic, onBack, onToggleComplete, onToggleBookmark
               )}
             </Button>
             
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => onToggleBookmark(topic.id)}
-              className={topic.bookmark ? "text-warning" : ""}
-            >
-              {topic.bookmark ? (
-                <BookmarkCheck className="w-4 h-4 fill-current" />
-              ) : (
-                <Bookmark className="w-4 h-4" />
-              )}
-            </Button>
           </div>
           
           {/* Font size controls */}

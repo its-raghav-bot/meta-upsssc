@@ -68,14 +68,14 @@
   }
 
   .dark {
-    /* Dark mode optimized for Hindi reading */
-    --background: 240 10% 4%;
+    /* AMOLED dark mode - true black for battery efficiency */
+    --background: 0 0% 0%;
     --foreground: 210 40% 98%;
 
-    --card: 240 10% 8%;
+    --card: 0 0% 2%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 240 10% 8%;
+    --popover: 0 0% 2%;
     --popover-foreground: 210 40% 98%;
 
     /* Softer saffron for dark mode */
@@ -83,13 +83,13 @@
     --primary-foreground: 240 10% 4%;
     --primary-soft: 35 60% 15%;
 
-    --secondary: 240 10% 15%;
+    --secondary: 0 0% 8%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 240 10% 15%;
+    --muted: 0 0% 8%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 35 60% 15%;
+    --accent: 35 60% 8%;
     --accent-foreground: 35 80% 80%;
 
     --destructive: 0 62% 50%;
@@ -101,17 +101,17 @@
     --warning: 45 93% 55%;
     --warning-foreground: 240 10% 4%;
 
-    --border: 240 10% 20%;
-    --input: 240 10% 20%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
     --ring: 35 80% 60%;
 
-    --sidebar-background: 240 10% 6%;
+    --sidebar-background: 0 0% 0%;
     --sidebar-foreground: 210 40% 90%;
     --sidebar-primary: 35 80% 60%;
-    --sidebar-primary-foreground: 240 10% 4%;
-    --sidebar-accent: 240 10% 12%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 0 0% 5%;
     --sidebar-accent-foreground: 210 40% 90%;
-    --sidebar-border: 240 10% 20%;
+    --sidebar-border: 0 0% 15%;
     --sidebar-ring: 35 80% 60%;
   }
 }
