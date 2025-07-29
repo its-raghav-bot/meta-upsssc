@@ -59,12 +59,20 @@ export const usePdfData = () => {
       const link = document.createElement('a');
       link.href = url;
       link.download = fileName;
+      link.style.display = 'none'; // Hide the link
+      
+      // Add to DOM, click, and remove immediately
       document.body.appendChild(link);
       link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
+      
+      // Clean up after a short delay to ensure download starts
+      setTimeout(() => {
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      }, 100);
     } catch (error) {
       console.error('Error downloading PDF:', error);
+      alert('Failed to download PDF. Please try again.');
     }
   };
 
