@@ -21,39 +21,39 @@ export const Header = ({
 }: HeaderProps) => {
   return (
     <header className="sticky top-0 z-20 bg-background/95 backdrop-blur-sm border-b border-border">
-      <div className="flex items-center justify-between p-4">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between p-2">
+        <div className="flex items-center gap-2">
           {showBackButton && onBack ? (
-            <Button variant="ghost" size="sm" onClick={onBack} className="p-2">
+            <Button variant="ghost" size="sm" onClick={onBack} className="p-1.5 h-7 w-7">
               ←
             </Button>
           ) : onMenuClick ? (
-            <Button variant="ghost" size="sm" onClick={onMenuClick} className="p-2">
-              <Menu className="w-5 h-5" />
+            <Button variant="ghost" size="sm" onClick={onMenuClick} className="p-1.5 h-7 w-7">
+              <Menu className="w-4 h-4" />
             </Button>
           ) : null}
           
-          <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold text-primary font-hindi">
+          <div className="flex items-center gap-1.5">
+            <h1 className="text-lg font-bold text-primary font-hindi">
               {title}
             </h1>
-            <Badge variant="secondary" className="text-xs px-2 py-0.5">
+            <Badge variant="secondary" className="text-[10px] px-1.5 py-0.5">
               UPSSSC PET
             </Badge>
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           <Button
             variant="ghost"
             size="sm"
             onClick={onThemeToggle}
-            className="p-2"
+            className="p-1.5 h-7 w-7"
           >
             {isDark ? (
-              <Sun className="w-4 h-4" />
+              <Sun className="w-3.5 h-3.5" />
             ) : (
-              <Moon className="w-4 h-4" />
+              <Moon className="w-3.5 h-3.5" />
             )}
           </Button>
           

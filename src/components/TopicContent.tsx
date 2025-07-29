@@ -41,33 +41,33 @@ export const TopicContent = ({ topic, onBack, onToggleComplete }: TopicContentPr
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="sticky top-0 z-10 bg-background/95 backdrop-blur-sm border-b border-border p-4">
-        <div className="flex items-center gap-3 mb-3">
-          <Button variant="ghost" size="sm" onClick={onBack} className="p-2">
-            <ArrowLeft className="w-4 h-4" />
+      <div className="sticky top-0 z-10 bg-background/95 backdrop-blur-sm border-b border-border p-2.5">
+        <div className="flex items-center gap-2 mb-2">
+          <Button variant="ghost" size="sm" onClick={onBack} className="p-1.5 h-7 w-7">
+            <ArrowLeft className="w-3.5 h-3.5" />
           </Button>
-          <h1 className="flex-1 font-semibold text-hindi-lg text-foreground truncate">
+          <h1 className="flex-1 font-semibold text-base text-foreground truncate">
             {topic.name}
           </h1>
         </div>
 
         {/* Action buttons */}
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <Button
               variant={topic.isCompleted ? "default" : "outline"}
               size="sm"
               onClick={() => onToggleComplete(topic.id)}
-              className={topic.isCompleted ? "bg-success text-success-foreground" : ""}
+              className={`${topic.isCompleted ? "bg-success text-success-foreground" : ""} h-7 px-2.5 text-xs`}
             >
               {topic.isCompleted ? (
                 <>
-                  <CheckCircle2 className="w-4 h-4 mr-1" />
+                  <CheckCircle2 className="w-3 h-3 mr-1" />
                   पूर्ण
                 </>
               ) : (
                 <>
-                  <Circle className="w-4 h-4 mr-1" />
+                  <Circle className="w-3 h-3 mr-1" />
                   पूर्ण करें
                 </>
               )}
@@ -75,23 +75,23 @@ export const TopicContent = ({ topic, onBack, onToggleComplete }: TopicContentPr
           </div>
 
           {/* Font size controls */}
-          <div className="flex items-center gap-1">
-            <Button variant="ghost" size="sm" onClick={decreaseFontSize} className="px-2">
+          <div className="flex items-center gap-0.5">
+            <Button variant="ghost" size="sm" onClick={decreaseFontSize} className="px-1.5 h-7 w-7">
               <span className="text-xs">A</span>
             </Button>
-            <Button variant="ghost" size="sm" onClick={() => setFontSize(16)} className="px-2">
-              <RotateCcw className="w-3 h-3" />
+            <Button variant="ghost" size="sm" onClick={() => setFontSize(16)} className="px-1.5 h-7 w-7">
+              <RotateCcw className="w-2.5 h-2.5" />
             </Button>
-            <Button variant="ghost" size="sm" onClick={increaseFontSize} className="px-2">
-              <span className="text-lg">A</span>
+            <Button variant="ghost" size="sm" onClick={increaseFontSize} className="px-1.5 h-7 w-7">
+              <span className="text-sm">A</span>
             </Button>
           </div>
         </div>
       </div>
 
       {/* Content */}
-      <div className="p-4 space-y-6 pb-6">
-        <Card className="p-4 md:p-6 shadow-sm">
+      <div className="p-2.5 space-y-4 pb-4">
+        <Card className="p-3 md:p-4 shadow-sm">
           {(topic.type === 'pdf' && topic.pdfUrl) || pdfUrl ? (
             <PdfViewer
               pdfUrl={pdfUrl || topic.pdfUrl || ''}
@@ -102,7 +102,7 @@ export const TopicContent = ({ topic, onBack, onToggleComplete }: TopicContentPr
           ) : (
             <div 
               className="prose prose-lg max-w-none font-hindi leading-relaxed text-foreground"
-              style={{ fontSize: `${fontSize}px`, lineHeight: 1.8 }}
+              style={{ fontSize: `${fontSize}px`, lineHeight: 1.6 }}
             >
               <div className="whitespace-pre-line">
                 {topic.content}
@@ -112,7 +112,7 @@ export const TopicContent = ({ topic, onBack, onToggleComplete }: TopicContentPr
         </Card>
 
         {/* Topic metadata */}
-        <div className="text-sm text-muted-foreground text-center">
+        <div className="text-xs text-muted-foreground text-center">
           {topic.lastRead && (
             <p>पिछली बार पढ़ा: {new Date(topic.lastRead).toLocaleDateString('hi-IN')}</p>
           )}
