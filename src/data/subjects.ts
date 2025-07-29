@@ -2,316 +2,247 @@ import { Subject } from "@/types/notes";
 
 export const subjects: Subject[] = [
   {
-    id: "history",
-    name: "भारतीय इतिहास",
+    id: "indian-history",
+    name: "Indian History",
     icon: "🏛️",
-    color: "hsl(35, 100%, 50%)",
-    chapters: [
-      {
-        id: "ancient-history",
-        name: "प्राचीन भारतीय इतिहास",
-        subjectId: "history",
-        topics: [
-          {
-            id: "indus-valley",
-            name: "सिंधु घाटी सभ्यता",
-            chapterId: "ancient-history",
-            content: `सिंधु घाटी सभ्यता (हड़प्पा सभ्यता) - 2500-1500 ईसा पूर्व
-
-मुख्य केंद्र:
-• हड़प्पा (पाकिस्तान)
-• मोहनजो-दड़ो (पाकिस्तान)
-• कालीबंगा (राजस्थान)
-• लोथल (गुजरात)
-• धौलावीरा (गुजरात)
-
-विशेषताएं:
-• नगर नियोजन - ग्रिड पैटर्न
-• जल निकासी व्यवस्था
-• मानकीकृत ईंटें
-• कांस्य उपकरण
-• चित्रलिपि (अभी भी अपठित)
-
-व्यापार:
-• मेसोपोटामिया से व्यापार संबंध
-• सोना, चांदी, तांबा, हाथी दांत
-• कपास की खेती (पहली बार)
-
-समाज:
-• मातृसत्तात्मक समाज के संकेत
-• धर्म - प्रकृति पूजा, पशुपति महादेव
-• कोई महल या मंदिर नहीं मिला
-
-पतन के कारण:
-• आर्य आक्रमण (पुराना सिद्धांत)
-• जलवायु परिवर्तन
-• नदी मार्ग परिवर्तन
-• भूकंप`,
-            type: "text",
-            isCompleted: false,
-            pdfUrl: "https://hfqhntdyrtzvbkiekult.supabase.co/storage/v1/object/public/notes/itihas/DEEPTI%20(1).pdf"
-          },
-          {
-            id: "vedic-civilization",
-            name: "वैदिक सभ्यता",
-            chapterId: "ancient-history",
-            content: `वैदिक सभ्यता (1500-600 ईसा पूर्व)
-
-प्रारंभिक वैदिक काल (1500-1000 ईसा पूर्व):
-• ऋग्वेद की रचना
-• मुख्यतः सप्तसिंधु क्षेत्र
-• पशुपालन मुख्य व्यवसाय
-• जनजातीय समाज
-
-समाज:
-• पितृसत्तात्मक परिवार
-• चार वर्ण - ब्राह्मण, क्षत्रिय, वैश्य, शूद्र
-• गोत्र प्रथा
-• संयुक्त परिवार
-
-धर्म:
-• प्रकृति पूजा
-• मुख्य देवता: इंद्र, अग्नि, वरुण, सूर्य
-• यज्ञ प्रधान धर्म
-• कर्मकांड
-
-उत्तर वैदिक काल (1000-600 ईसा पूर्व):
-• गंगा-यमुना दोआब में विस्तार
-• कृषि का विकास
-• नगरों का उदय
-• लोहे का प्रयोग
-
-ग्रंथ:
-• चारों वेद (ऋग्, साम, यजुर्, अथर्व)
-• ब्राह्मण ग्रंथ
-• उपनिषद
-• आरण्यक`,
-            type: "text",
-            isCompleted: false
-          }
-        ]
-      }
-    ]
+    color: "hsl(35, 70%, 55%)",
+    chapters: [{
+      id: "history-topics",
+      name: "Historical Topics",
+      subjectId: "indian-history",
+      topics: [
+        { id: "indus-valley", name: "Indus valley civilization", chapterId: "history-topics", content: "Content for Indus valley civilization", type: "text", isCompleted: false },
+        { id: "vedic-civilization", name: "Vedic civilization", chapterId: "history-topics", content: "Content for Vedic civilization", type: "text", isCompleted: false },
+        { id: "buddhism", name: "Buddhism", chapterId: "history-topics", content: "Content for Buddhism", type: "text", isCompleted: false },
+        { id: "jainism", name: "Jainism", chapterId: "history-topics", content: "Content for Jainism", type: "text", isCompleted: false },
+        { id: "mauryan-empire", name: "Mauryan empire", chapterId: "history-topics", content: "Content for Mauryan empire", type: "text", isCompleted: false },
+        { id: "gupta-empire", name: "Gupta empire", chapterId: "history-topics", content: "Content for Gupta empire", type: "text", isCompleted: false },
+        { id: "harshavardhan", name: "Harshavardhan", chapterId: "history-topics", content: "Content for Harshavardhan", type: "text", isCompleted: false },
+        { id: "rajput-era", name: "Rajput era", chapterId: "history-topics", content: "Content for Rajput era", type: "text", isCompleted: false },
+        { id: "sultanate-era", name: "Sultanate era", chapterId: "history-topics", content: "Content for Sultanate era", type: "text", isCompleted: false },
+        { id: "mughal-empire", name: "Mughal empire", chapterId: "history-topics", content: "Content for Mughal empire", type: "text", isCompleted: false },
+        { id: "maratha-empire", name: "Maratha empire", chapterId: "history-topics", content: "Content for Maratha empire", type: "text", isCompleted: false },
+        { id: "british-rule", name: "British Rule and 1st war of independence", chapterId: "history-topics", content: "Content for British Rule and 1st war of independence", type: "text", isCompleted: false },
+        { id: "social-economic-impact", name: "Social and economic impact of British rule", chapterId: "history-topics", content: "Content for Social and economic impact of British rule", type: "text", isCompleted: false }
+      ]
+    }]
+  },
+  {
+    id: "national-movement",
+    name: "Indian National Movement",
+    icon: "🇮🇳",
+    color: "hsl(15, 85%, 60%)",
+    chapters: [{
+      id: "movement-topics",
+      name: "Movement Topics",
+      subjectId: "national-movement",
+      topics: [
+        { id: "initial-stage", name: "Initial stage of freedom movement", chapterId: "movement-topics", content: "Content for Initial stage of freedom movement", type: "text", isCompleted: false },
+        { id: "swadeshi-civil-disobedience", name: "Swadeshi and civil disobedience movement - Mahatma Gandhi and other leaders' role", chapterId: "movement-topics", content: "Content for Swadeshi and civil disobedience movement", type: "text", isCompleted: false },
+        { id: "revolutionary-movement", name: "Revolutionary movement and rise of militant nationalism", chapterId: "movement-topics", content: "Content for Revolutionary movement and rise of militant nationalism", type: "text", isCompleted: false },
+        { id: "farewell-amendment", name: "Farewell Amendment and British India Act 1935", chapterId: "movement-topics", content: "Content for Farewell Amendment and British India Act 1935", type: "text", isCompleted: false },
+        { id: "quit-india", name: "Quit India movement, Azad Hind Fauj and Netaji Subhash Chandra Bose", chapterId: "movement-topics", content: "Content for Quit India movement, Azad Hind Fauj and Netaji Subhash Chandra Bose", type: "text", isCompleted: false }
+      ]
+    }]
   },
   {
     id: "geography",
-    name: "भूगोल",
+    name: "Geography (Indian & World)",
     icon: "🌍",
-    color: "hsl(120, 40%, 50%)",
-    chapters: [
-      {
-        id: "indian-geography",
-        name: "भारतीय भूगोल",
-        subjectId: "geography",
-        topics: [
-          {
-            id: "rivers",
-            name: "भारतीय नदियां",
-            chapterId: "indian-geography",
-            content: `भारत की प्रमुख नदियां
-
-गंगा नदी तंत्र:
-• उद्गम: गंगोत्री (गौमुख)
-• लंबाई: 2525 किमी
-• सहायक नदियां: यमुना, गोमती, घाघरा, गंडक, कोसी
-• मुंह: बंगाल की खाड़ी
-• राज्य: उत्तराखंड, उत्तर प्रदेश, बिहार, झारखंड, पश्चिम बंगाल
-
-यमुना नदी:
-• उद्गम: यमुनोत्री
-• लंबाई: 1376 किमी
-• सहायक नदियां: चंबल, बेतवा, केन, सिंध
-• गंगा में मिलना: प्रयागराज
-
-सिंधु नदी तंत्र:
-• उद्गम: कैलाश पर्वत (तिब्बत)
-• सहायक नदियां: झेलम, चिनाब, रावी, व्यास, सतलुज
-• मुंह: अरब सागर
-
-दक्षिण भारतीय नदियां:
-गोदावरी:
-• लंबाई: 1465 किमी
-• उद्गम: त्र्यंबकेश्वर (महाराष्ट्र)
-• मुंह: बंगाल की खाड़ी
-
-कृष्णा:
-• लंबाई: 1400 किमी
-• उद्गम: महाबलेश्वर
-• राज्य: महाराष्ट्र, कर्नाटक, तेलंगाना, आंध्र प्रदेश
-
-कावेरी:
-• उद्गम: कूर्ग (कर्नाटक)
-• मुंह: बंगाल की खाड़ी
-• राज्य: कर्नाटक, तमिलनाडु`,
-            type: "text",
-            isCompleted: false
-          }
-        ]
-      }
-    ]
+    color: "hsl(120, 60%, 50%)",
+    chapters: [{
+      id: "geography-topics",
+      name: "Geography Topics",
+      subjectId: "geography",
+      topics: [
+        { id: "rivers", name: "Rivers", chapterId: "geography-topics", content: "Content for Rivers", type: "text", isCompleted: false },
+        { id: "water-resources", name: "Water resources", chapterId: "geography-topics", content: "Content for Water resources", type: "text", isCompleted: false },
+        { id: "mountains-glaciers", name: "Mountains & glaciers", chapterId: "geography-topics", content: "Content for Mountains & glaciers", type: "text", isCompleted: false },
+        { id: "desert-dry-areas", name: "Desert & dry areas", chapterId: "geography-topics", content: "Content for Desert & dry areas", type: "text", isCompleted: false },
+        { id: "forest", name: "Forest", chapterId: "geography-topics", content: "Content for Forest", type: "text", isCompleted: false },
+        { id: "mineral-resources", name: "Mineral resources", chapterId: "geography-topics", content: "Content for Mineral resources", type: "text", isCompleted: false },
+        { id: "political-geography", name: "Political Geography of India & World", chapterId: "geography-topics", content: "Content for Political Geography of India & World", type: "text", isCompleted: false },
+        { id: "climate", name: "Climate", chapterId: "geography-topics", content: "Content for Climate", type: "text", isCompleted: false },
+        { id: "time-zone", name: "Time zone", chapterId: "geography-topics", content: "Content for Time zone", type: "text", isCompleted: false },
+        { id: "demographics-migrations", name: "Demographics & migrations", chapterId: "geography-topics", content: "Content for Demographics & migrations", type: "text", isCompleted: false }
+      ]
+    }]
   },
   {
-    id: "constitution",
-    name: "भारतीय संविधान",
+    id: "indian-economy",
+    name: "Indian Economy (1947 to 1991)",
+    icon: "💰",
+    color: "hsl(45, 90%, 55%)",
+    chapters: [{
+      id: "economy-topics",
+      name: "Economy Topics",
+      subjectId: "indian-economy",
+      topics: [
+        { id: "planning-commission", name: "Planning commission and 5-year plans", chapterId: "economy-topics", content: "Content for Planning commission and 5-year plans", type: "text", isCompleted: false },
+        { id: "mixed-economy", name: "Development of mixed economy: Private & Public", chapterId: "economy-topics", content: "Content for Development of mixed economy", type: "text", isCompleted: false },
+        { id: "green-revolution", name: "Green revolution", chapterId: "economy-topics", content: "Content for Green revolution", type: "text", isCompleted: false },
+        { id: "white-revolution", name: "White revolution & operation flood", chapterId: "economy-topics", content: "Content for White revolution & operation flood", type: "text", isCompleted: false },
+        { id: "banking-nationalization", name: "Banking nationalization", chapterId: "economy-topics", content: "Content for Banking nationalization", type: "text", isCompleted: false },
+        { id: "lpg-reforms", name: "LPG reforms of 1991", chapterId: "economy-topics", content: "Content for LPG reforms of 1991", type: "text", isCompleted: false },
+        { id: "economic-reforms-2014", name: "Economic reforms post-2014", chapterId: "economy-topics", content: "Content for Economic reforms post-2014", type: "text", isCompleted: false },
+        { id: "farm-reforms", name: "Farm reforms", chapterId: "economy-topics", content: "Content for Farm reforms", type: "text", isCompleted: false },
+        { id: "structural-reforms", name: "Structural reforms", chapterId: "economy-topics", content: "Content for Structural reforms", type: "text", isCompleted: false },
+        { id: "labour-reforms", name: "Labour reforms", chapterId: "economy-topics", content: "Content for Labour reforms", type: "text", isCompleted: false },
+        { id: "economic-reforms", name: "Economic reforms", chapterId: "economy-topics", content: "Content for Economic reforms", type: "text", isCompleted: false },
+        { id: "gst", name: "GST", chapterId: "economy-topics", content: "Content for GST", type: "text", isCompleted: false }
+      ]
+    }]
+  },
+  {
+    id: "constitution-administration",
+    name: "Indian Constitution & Public Administration",
     icon: "⚖️",
-    color: "hsl(240, 100%, 50%)",
-    chapters: [
-      {
-        id: "fundamental-rights",
-        name: "मौलिक अधिकार",
-        subjectId: "constitution",
-        topics: [
-          {
-            id: "fundamental-rights-overview",
-            name: "मौलिक अधिकारों का परिचय",
-            chapterId: "fundamental-rights",
-            content: `मौलिक अधिकार (अनुच्छेद 12-35)
-
-छह मौलिक अधिकार:
-
-1. समानता का अधिकार (अनुच्छेद 14-18):
-• कानून के समक्ष समानता (अनुच्छेद 14)
-• धर्म, जाति, लिंग के आधार पर भेदभाव का निषेध (अनुच्छेद 15)
-• लोक नियोजन में अवसर की समानता (अनुच्छेद 16)
-• अस्पृश्यता का अंत (अनुच्छेद 17)
-• उपाधियों का अंत (अनुच्छेद 18)
-
-2. स्वतंत्रता का अधिकार (अनुच्छेद 19-22):
-• भाषण एवं अभिव्यक्ति की स्वतंत्रता
-• शांतिपूर्ण सभा की स्वतंत्रता
-• संगम या संघ बनाने की स्वतंत्रता
-• देश में कहीं भी आने-जाने की स्वतंत्रता
-• व्यवसाय की स्वतंत्रता
-• जीवन एवं व्यक्तिगत स्वतंत्रता (अनुच्छेद 21)
-
-3. शोषण के विरुद्ध अधिकार (अनुच्छेद 23-24):
-• मानव दुर्व्यापार और बेगार का निषेध
-• 14 वर्ष से कम आयु के बच्चों को कारखानों में काम का निषेध
-
-4. धर्म की स्वतंत्रता का अधिकार (अनुच्छेद 25-28):
-• अंतरात्मा की स्वतंत्रता
-• धार्मिक कार्यों के प्रबंध की स्वतंत्रता
-• धार्मिक शिक्षा की स्वतंत्रता
-
-5. सांस्कृतिक और शैक्षणिक अधिकार (अनुच्छेद 29-30):
-• अल्पसंख्यकों के हितों का संरक्षण
-• शिक्षा संस्थानों की स्थापना और प्रशासन
-
-6. संवैधानिक उपचारों का अधिकार (अनुच्छेद 32):
-• मौलिक अधिकारों की रक्षा के लिए न्यायालय जाना
-• डॉ. अम्बेडकर ने इसे "संविधान का हृदय और आत्मा" कहा`,
-            type: "text",
-            isCompleted: false
-          }
-        ]
-      }
-    ]
-  },
-  {
-    id: "hindi",
-    name: "सामान्य हिंदी",
-    icon: "📚",
-    color: "hsl(0, 100%, 50%)",
-    chapters: [
-      {
-        id: "grammar",
-        name: "व्याकरण",
-        subjectId: "hindi",
-        topics: [
-          {
-            id: "sandhi",
-            name: "संधि",
-            chapterId: "grammar",
-            content: `संधि - दो वर्णों के मेल से होने वाला विकार
-
-संधि के प्रकार:
-
-1. स्वर संधि:
-दो स्वरों के मेल से होने वाला विकार
-
-उदाहरण:
-• विद्या + आलय = विद्यालय
-• महा + आत्मा = महात्मा
-• रमा + ईश = रमेश
-• गुरु + उपदेश = गुरूपदेश
-
-2. व्यंजन संधि:
-व्यंजन + स्वर या व्यंजन + व्यंजन के मेल से होने वाला विकार
-
-उदाहरण:
-• सत् + चित् = सच्चित्
-• उत् + हार = उद्धार
-• तत् + रूप = तद्रूप
-
-3. विसर्ग संधि:
-विसर्ग (:) + स्वर या व्यंजन के मेल से होने वाला विकार
-
-उदाहरण:
-• मनः + रथ = मनोरथ
-• यशः + दा = यशोदा
-• निः + कपट = निष्कपट
-
-महत्वपूर्ण नियम:
-• समान स्वर मिलकर दीर्घ हो जाते हैं
-• असमान स्वर मिलकर अर्द्ध स्वर (य्, व्) बन जाते हैं
-• क, च, ट, त, प के बाद घोष वर्ण आने पर ये अपने घोष रूप में बदल जाते हैं`,
-            type: "text",
-            isCompleted: false
-          }
-        ]
-      }
-    ]
+    color: "hsl(240, 70%, 60%)",
+    chapters: [{
+      id: "constitution-topics",
+      name: "Constitution Topics",
+      subjectId: "constitution-administration",
+      topics: [
+        { id: "salient-features", name: "Salient Features", chapterId: "constitution-topics", content: "Content for Salient Features", type: "text", isCompleted: false },
+        { id: "directive-principles", name: "Directive principles", chapterId: "constitution-topics", content: "Content for Directive principles", type: "text", isCompleted: false },
+        { id: "fundamental-rights-duties", name: "Fundamental rights & duties", chapterId: "constitution-topics", content: "Content for Fundamental rights & duties", type: "text", isCompleted: false },
+        { id: "parliamentary-system", name: "Parliamentary system", chapterId: "constitution-topics", content: "Content for Parliamentary system", type: "text", isCompleted: false },
+        { id: "federal-system", name: "Federal system, Union Govt & UR, Union Govt & States", chapterId: "constitution-topics", content: "Content for Federal system", type: "text", isCompleted: false },
+        { id: "judicial-framework", name: "Judicial Framework", chapterId: "constitution-topics", content: "Content for Judicial Framework", type: "text", isCompleted: false },
+        { id: "district-administration", name: "District Administration", chapterId: "constitution-topics", content: "Content for District Administration", type: "text", isCompleted: false },
+        { id: "local-bodies", name: "Local bodies and Panchayat Raj", chapterId: "constitution-topics", content: "Content for Local bodies and Panchayat Raj", type: "text", isCompleted: false }
+      ]
+    }]
   },
   {
     id: "general-science",
-    name: "सामान्य विज्ञान",
+    name: "General Science",
     icon: "🔬",
-    color: "hsl(180, 100%, 50%)",
-    chapters: [
-      {
-        id: "physics",
-        name: "भौतिक विज्ञान",
-        subjectId: "general-science",
-        topics: [
-          {
-            id: "motion-laws",
-            name: "गति के नियम",
-            chapterId: "physics",
-            content: `न्यूटन के गति के नियम
-
-प्रथम नियम (जड़त्व का नियम):
-• कोई भी वस्तु तब तक विराम में या एकसमान गति में रहती है, जब तक कि कोई बाहरी बल उस पर कार्य न करे
-• जड़त्व: वस्तु की अपनी अवस्था में बने रहने की प्रवृत्ति
-
-द्वितीय नियम (संवेग परिवर्तन का नियम):
-• F = ma
-• बल = द्रव्यमान × त्वरण
-• बल संवेग परिवर्तन की दर के समानुपाती होता है
-
-तृतीय नियम (क्रिया-प्रतिक्रिया का नियम):
-• प्रत्येक क्रिया की समान और विपरीत प्रतिक्रिया होती है
-• उदाहरण: चलते समय पैर से जमीन को धकेलना
-
-गुरुत्वाकर्षण:
-• पृथ्वी का गुरुत्वीय त्वरण = 9.8 m/s²
-• चंद्रमा पर गुरुत्वीय त्वरण = 1.6 m/s²
-• वजन = द्रव्यमान × गुरुत्वीय त्वरण
-
-घर्षण:
-• स्थैतिक घर्षण: विराम अवस्था में
-• गतिक घर्षण: गति अवस्था में
-• लुढ़कना घर्षण: पहिया घूमते समय
-
-कार्य, शक्ति और ऊर्जा:
-• कार्य = बल × विस्थापन
-• शक्ति = कार्य / समय
-• गतिज ऊर्जा = ½mv²
-• स्थितिज ऊर्जा = mgh`,
-            type: "text",
-            isCompleted: false
-          }
-        ]
-      }
-    ]
+    color: "hsl(180, 70%, 50%)",
+    chapters: [{
+      id: "science-topics",
+      name: "Science Topics",
+      subjectId: "general-science",
+      topics: [
+        { id: "basic-physics", name: "Basic Physics", chapterId: "science-topics", content: "Content for Basic Physics", type: "text", isCompleted: false },
+        { id: "basic-chemistry", name: "Basic Chemistry", chapterId: "science-topics", content: "Content for Basic Chemistry", type: "text", isCompleted: false },
+        { id: "basic-biology", name: "Basic Biology", chapterId: "science-topics", content: "Content for Basic Biology", type: "text", isCompleted: false }
+      ]
+    }]
+  },
+  {
+    id: "elementary-arithmetic",
+    name: "Elementary Arithmetic",
+    icon: "🔢",
+    color: "hsl(300, 70%, 55%)",
+    chapters: [{
+      id: "arithmetic-topics",
+      name: "Arithmetic Topics",
+      subjectId: "elementary-arithmetic",
+      topics: [
+        { id: "whole-numbers", name: "Whole numbers, fractions and decimals", chapterId: "arithmetic-topics", content: "Content for Whole numbers, fractions and decimals", type: "text", isCompleted: false },
+        { id: "percentage", name: "Percentage", chapterId: "arithmetic-topics", content: "Content for Percentage", type: "text", isCompleted: false },
+        { id: "arithmetic-equations", name: "Simple arithmetic equations", chapterId: "arithmetic-topics", content: "Content for Simple arithmetic equations", type: "text", isCompleted: false },
+        { id: "square-roots", name: "Square & square roots", chapterId: "arithmetic-topics", content: "Content for Square & square roots", type: "text", isCompleted: false },
+        { id: "exponent-powers", name: "Exponent and powers", chapterId: "arithmetic-topics", content: "Content for Exponent and powers", type: "text", isCompleted: false },
+        { id: "average", name: "Average", chapterId: "arithmetic-topics", content: "Content for Average", type: "text", isCompleted: false }
+      ]
+    }]
+  },
+  {
+    id: "general-hindi",
+    name: "General Hindi",
+    icon: "📚",
+    color: "hsl(0, 70%, 55%)",
+    chapters: [{
+      id: "hindi-topics",
+      name: "Hindi Topics",
+      subjectId: "general-hindi",
+      topics: [
+        { id: "sandhi", name: "संधि", chapterId: "hindi-topics", content: "Content for संधि", type: "text", isCompleted: false },
+        { id: "vilom-shabd", name: "विलोम शब्द", chapterId: "hindi-topics", content: "Content for विलोम शब्द", type: "text", isCompleted: false },
+        { id: "paryayvachi", name: "पर्यायवाची वाक्यांशों के लिए एक शब्द", chapterId: "hindi-topics", content: "Content for पर्यायवाची वाक्यांशों के लिए एक शब्द", type: "text", isCompleted: false },
+        { id: "ling", name: "लिंग", chapterId: "hindi-topics", content: "Content for लिंग", type: "text", isCompleted: false },
+        { id: "samashrut", name: "समश्रुतभिन्नार्थक शब्द", chapterId: "hindi-topics", content: "Content for समश्रुतभिन्नार्थक शब्द", type: "text", isCompleted: false },
+        { id: "muhavare", name: "मुहावरे-लोकोक्तियां", chapterId: "hindi-topics", content: "Content for मुहावरे-लोकोक्तियां", type: "text", isCompleted: false },
+        { id: "ashuddhiyan", name: "सामान्य अशुद्धियां", chapterId: "hindi-topics", content: "Content for सामान्य अशुद्धियां", type: "text", isCompleted: false },
+        { id: "lekhak-rachnaye", name: "लेखक और रचनाएं", chapterId: "hindi-topics", content: "Content for लेखक और रचनाएं", type: "text", isCompleted: false }
+      ]
+    }]
+  },
+  {
+    id: "general-english",
+    name: "General English",
+    icon: "🔤",
+    color: "hsl(210, 70%, 55%)",
+    chapters: [{
+      id: "english-topics",
+      name: "English Topics",
+      subjectId: "general-english",
+      topics: [
+        { id: "grammar", name: "English Grammar", chapterId: "english-topics", content: "Content for English Grammar", type: "text", isCompleted: false },
+        { id: "passages", name: "Questions on passages", chapterId: "english-topics", content: "Content for Questions on passages", type: "text", isCompleted: false }
+      ]
+    }]
+  },
+  {
+    id: "logic-reasoning",
+    name: "Logic & Reasoning",
+    icon: "🧠",
+    color: "hsl(270, 70%, 55%)",
+    chapters: [{
+      id: "reasoning-topics",
+      name: "Reasoning Topics",
+      subjectId: "logic-reasoning",
+      topics: [
+        { id: "order-ranking", name: "Order & ranking", chapterId: "reasoning-topics", content: "Content for Order & ranking", type: "text", isCompleted: false },
+        { id: "blood-relations", name: "Blood relations", chapterId: "reasoning-topics", content: "Content for Blood relations", type: "text", isCompleted: false },
+        { id: "calendar-watch", name: "Calendar & watch", chapterId: "reasoning-topics", content: "Content for Calendar & watch", type: "text", isCompleted: false },
+        { id: "cause-effect", name: "Cause & effect", chapterId: "reasoning-topics", content: "Content for Cause & effect", type: "text", isCompleted: false },
+        { id: "coding-decoding", name: "Coding decoding", chapterId: "reasoning-topics", content: "Content for Coding decoding", type: "text", isCompleted: false },
+        { id: "conclusive-reasoning", name: "Conclusive reasoning, etc.", chapterId: "reasoning-topics", content: "Content for Conclusive reasoning", type: "text", isCompleted: false }
+      ]
+    }]
+  },
+  {
+    id: "current-affairs",
+    name: "Current Affairs",
+    icon: "📰",
+    color: "hsl(25, 80%, 55%)",
+    chapters: [{
+      id: "affairs-topics",
+      name: "Current Affairs Topics",
+      subjectId: "current-affairs",
+      topics: [
+        { id: "national-affairs", name: "National current affairs", chapterId: "affairs-topics", content: "Content for National current affairs", type: "text", isCompleted: false },
+        { id: "international-affairs", name: "International current affairs", chapterId: "affairs-topics", content: "Content for International current affairs", type: "text", isCompleted: false }
+      ]
+    }]
+  },
+  {
+    id: "general-awareness",
+    name: "General Awareness",
+    icon: "🌟",
+    color: "hsl(60, 80%, 55%)",
+    chapters: [{
+      id: "awareness-topics",
+      name: "General Awareness Topics",
+      subjectId: "general-awareness",
+      topics: [
+        { id: "neighbours", name: "India's Neighbours", chapterId: "awareness-topics", content: "Content for India's Neighbours", type: "text", isCompleted: false },
+        { id: "countries-capitals", name: "Countries, Capitals & Currencies", chapterId: "awareness-topics", content: "Content for Countries, Capitals & Currencies", type: "text", isCompleted: false },
+        { id: "states-uts", name: "Indian States & UTs", chapterId: "awareness-topics", content: "Content for Indian States & UTs", type: "text", isCompleted: false },
+        { id: "parliament", name: "Indian Parliament", chapterId: "awareness-topics", content: "Content for Indian Parliament", type: "text", isCompleted: false },
+        { id: "important-days", name: "Days of National & International Importance", chapterId: "awareness-topics", content: "Content for Days of National & International Importance", type: "text", isCompleted: false },
+        { id: "world-organizations", name: "World organizations & HQs", chapterId: "awareness-topics", content: "Content for World organizations & HQs", type: "text", isCompleted: false },
+        { id: "tourism", name: "Indian tourism destinations", chapterId: "awareness-topics", content: "Content for Indian tourism destinations", type: "text", isCompleted: false },
+        { id: "art-culture", name: "Indian art & culture", chapterId: "awareness-topics", content: "Content for Indian art & culture", type: "text", isCompleted: false },
+        { id: "sports", name: "Indian & International Sports", chapterId: "awareness-topics", content: "Content for Indian & International Sports", type: "text", isCompleted: false },
+        { id: "research-institutes", name: "Indian research institutes", chapterId: "awareness-topics", content: "Content for Indian research institutes", type: "text", isCompleted: false },
+        { id: "books-authors", name: "Books & Authors", chapterId: "awareness-topics", content: "Content for Books & Authors", type: "text", isCompleted: false },
+        { id: "awards-honours", name: "Awards & Honours", chapterId: "awareness-topics", content: "Content for Awards & Honours", type: "text", isCompleted: false },
+        { id: "climate-environment", name: "Climate change & environment", chapterId: "awareness-topics", content: "Content for Climate change & environment", type: "text", isCompleted: false }
+      ]
+    }]
   }
 ];
