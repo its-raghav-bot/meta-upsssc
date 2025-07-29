@@ -33,16 +33,62 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
       'sultanate-era', 'mughal-empire', 'maratha-empire', 'british-rule-first-war',
       'social-economic-impact-british'
     ],
-    'national-movement': ['freedom-struggle', 'leaders', 'movements', 'independence'],
-    'geography': ['physical-geography', 'human-geography', 'indian-geography', 'world-geography'],
-    'indian-economy': ['economic-planning', 'sectors', 'policies', 'current-issues'],
-    'constitution': ['fundamental-rights', 'directive-principles', 'parliament', 'judiciary'],
-    'general-science': ['physics', 'chemistry', 'biology', 'environmental-science'],
-    'hindi': ['grammar', 'literature', 'comprehension', 'writing'],
-    'english': ['grammar', 'vocabulary', 'comprehension', 'writing'],
-    'mathematics': ['arithmetic', 'algebra', 'geometry', 'statistics'],
-    'general-awareness': ['current-affairs', 'static-gk', 'important-dates', 'awards'],
-    'reasoning': ['logical-reasoning', 'analytical-reasoning', 'verbal-reasoning', 'non-verbal-reasoning']
+    'national-movement': [
+      'early-resistance', 'sepoy-mutiny', 'congress-formation', 'partition-bengal',
+      'swadeshi-movement', 'revolutionary-movement', 'gandhian-era', 'non-cooperation',
+      'civil-disobedience', 'quit-india', 'freedom-fighters', 'independence-partition'
+    ],
+    'geography': [
+      'earth-structure', 'landforms', 'climate-weather', 'rivers-lakes',
+      'population-settlement', 'agriculture', 'industries', 'transport',
+      'indian-physical', 'indian-climate', 'indian-rivers', 'world-continents'
+    ],
+    'indian-economy': [
+      'economic-development', 'planning-commission', 'five-year-plans', 'agriculture-sector',
+      'industrial-sector', 'service-sector', 'banking-finance', 'monetary-policy',
+      'fiscal-policy', 'trade-commerce', 'economic-reforms', 'current-challenges'
+    ],
+    'constitution': [
+      'making-constitution', 'preamble', 'fundamental-rights', 'fundamental-duties',
+      'directive-principles', 'union-government', 'parliament', 'president',
+      'prime-minister', 'judiciary', 'supreme-court', 'state-government',
+      'local-government', 'emergency-provisions', 'amendments'
+    ],
+    'general-science': [
+      'mechanics', 'heat-thermodynamics', 'light-optics', 'electricity',
+      'atomic-structure', 'periodic-table', 'acids-bases', 'metals-nonmetals',
+      'cell-biology', 'human-body', 'plant-biology', 'genetics',
+      'ecology-environment', 'natural-resources', 'pollution-control'
+    ],
+    'hindi': [
+      'vyakaran-basics', 'sandhi', 'samas', 'chhand-alankar',
+      'kavya-sahitya', 'katha-sahitya', 'natak-sahitya', 'nibandh-sahitya',
+      'gadyansh', 'kavyansh', 'patra-lekhan', 'nibandh-lekhan'
+    ],
+    'english': [
+      'parts-of-speech', 'tenses', 'voice-narration', 'sentence-structure',
+      'vocabulary-building', 'synonyms-antonyms', 'idioms-phrases', 'one-word-substitution',
+      'reading-comprehension', 'cloze-test', 'error-correction', 'essay-writing'
+    ],
+    'mathematics': [
+      'number-system', 'percentage', 'profit-loss', 'simple-compound-interest',
+      'time-work', 'time-distance', 'averages', 'ratio-proportion',
+      'algebra-basics', 'linear-equations', 'geometry-basics', 'mensuration',
+      'trigonometry', 'statistics-basics', 'probability', 'data-interpretation'
+    ],
+    'general-awareness': [
+      'current-affairs-national', 'current-affairs-international', 'government-schemes',
+      'awards-honours', 'sports-events', 'books-authors', 'important-days',
+      'organizations', 'capitals-currencies', 'indian-states', 'world-geography-facts',
+      'science-technology', 'defence-security', 'economy-finance'
+    ],
+    'reasoning': [
+      'verbal-analogy', 'classification', 'series-completion', 'coding-decoding',
+      'blood-relations', 'direction-distance', 'ranking-arrangement', 'syllogism',
+      'statement-conclusion', 'statement-assumption', 'critical-reasoning',
+      'puzzles-seating', 'calendar-clock', 'number-series', 'figure-series',
+      'pattern-completion', 'mirror-water-images', 'paper-cutting-folding'
+    ]
   };
 
   const [existingSubjects, setExistingSubjects] = useState<string[]>(predefinedSubjects);
@@ -99,59 +145,162 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
       'social-economic-impact-british': 'ब्रिटिश शासन का सामाजिक और आर्थिक प्रभाव',
       
       // National Movement
-      'freedom-struggle': 'स्वतंत्रता संग्राम',
-      'leaders': 'नेता',
-      'movements': 'आंदोलन',
-      'independence': 'स्वतंत्रता',
+      'early-resistance': 'प्रारंभिक प्रतिरोध',
+      'sepoy-mutiny': 'सिपाही विद्रोह',
+      'congress-formation': 'कांग्रेस की स्थापना',
+      'partition-bengal': 'बंगाल विभाजन',
+      'swadeshi-movement': 'स्वदेशी आंदोलन',
+      'revolutionary-movement': 'क्रांतिकारी आंदोलन',
+      'gandhian-era': 'गांधी युग',
+      'non-cooperation': 'असहयोग आंदोलन',
+      'civil-disobedience': 'सविनय अवज्ञा',
+      'quit-india': 'भारत छोड़ो आंदोलन',
+      'freedom-fighters': 'स्वतंत्रता सेनानी',
+      'independence-partition': 'स्वतंत्रता और विभाजन',
       
       // Geography
-      'physical-geography': 'भौतिक भूगोल',
-      'human-geography': 'मानव भूगोल',
-      'indian-geography': 'भारतीय भूगोल',
-      'world-geography': 'विश्व भूगोल',
+      'earth-structure': 'पृथ्वी की संरचना',
+      'landforms': 'भू-आकृतियां',
+      'climate-weather': 'जलवायु और मौसम',
+      'rivers-lakes': 'नदियां और झीलें',
+      'population-settlement': 'जनसंख्या और बसाव',
+      'agriculture': 'कृषि',
+      'industries': 'उद्योग',
+      'transport': 'परिवहन',
+      'indian-physical': 'भारत का भौतिक स्वरूप',
+      'indian-climate': 'भारत की जलवायु',
+      'indian-rivers': 'भारत की नदियां',
+      'world-continents': 'विश्व के महाद्वीप',
       
       // Economy
-      'economic-planning': 'आर्थिक योजना',
-      'sectors': 'क्षेत्र',
-      'policies': 'नीतियां',
-      'current-issues': 'वर्तमान मुद्दे',
+      'economic-development': 'आर्थिक विकास',
+      'planning-commission': 'योजना आयोग',
+      'five-year-plans': 'पंचवर्षीय योजनाएं',
+      'agriculture-sector': 'कृषि क्षेत्र',
+      'industrial-sector': 'औद्योगिक क्षेत्र',
+      'service-sector': 'सेवा क्षेत्र',
+      'banking-finance': 'बैंकिंग और वित्त',
+      'monetary-policy': 'मौद्रिक नीति',
+      'fiscal-policy': 'राजकोषीय नीति',
+      'trade-commerce': 'व्यापार और वाणिज्य',
+      'economic-reforms': 'आर्थिक सुधार',
+      'current-challenges': 'वर्तमान चुनौतियां',
       
       // Constitution
+      'making-constitution': 'संविधान निर्माण',
+      'preamble': 'प्रस्तावना',
       'fundamental-rights': 'मौलिक अधिकार',
+      'fundamental-duties': 'मौलिक कर्तव्य',
       'directive-principles': 'नीति निदेशक तत्व',
+      'union-government': 'केंद्र सरकार',
       'parliament': 'संसद',
+      'president': 'राष्ट्रपति',
+      'prime-minister': 'प्रधानमंत्री',
       'judiciary': 'न्यायपालिका',
+      'supreme-court': 'सर्वोच्च न्यायालय',
+      'state-government': 'राज्य सरकार',
+      'local-government': 'स्थानीय सरकार',
+      'emergency-provisions': 'आपातकालीन प्रावधान',
+      'amendments': 'संशोधन',
       
       // Science
-      'physics': 'भौतिकी',
-      'chemistry': 'रसायन विज्ञान',
-      'biology': 'जीव विज्ञान',
-      'environmental-science': 'पर्यावरण विज्ञान',
+      'mechanics': 'यांत्रिकी',
+      'heat-thermodynamics': 'उष्मा और ऊष्मागतिकी',
+      'light-optics': 'प्रकाश और प्रकाशिकी',
+      'electricity': 'विद्युत',
+      'atomic-structure': 'परमाणु संरचना',
+      'periodic-table': 'आवर्त सारणी',
+      'acids-bases': 'अम्ल और क्षार',
+      'metals-nonmetals': 'धातु और अधातु',
+      'cell-biology': 'कोशिका जीव विज्ञान',
+      'human-body': 'मानव शरीर',
+      'plant-biology': 'वनस्पति विज्ञान',
+      'genetics': 'आनुवंशिकता',
+      'ecology-environment': 'पारिस्थितिकी और पर्यावरण',
+      'natural-resources': 'प्राकृतिक संसाधन',
+      'pollution-control': 'प्रदूषण नियंत्रण',
       
-      // Languages
-      'grammar': 'व्याकरण',
-      'literature': 'साहित्य',
-      'comprehension': 'गद्यांश',
-      'writing': 'लेखन',
-      'vocabulary': 'शब्दावली',
+      // Hindi
+      'vyakaran-basics': 'व्याकरण मूल बातें',
+      'sandhi': 'संधि',
+      'samas': 'समास',
+      'chhand-alankar': 'छंद और अलंकार',
+      'kavya-sahitya': 'काव्य साहित्य',
+      'katha-sahitya': 'कथा साहित्य',
+      'natak-sahitya': 'नाटक साहित्य',
+      'nibandh-sahitya': 'निबंध साहित्य',
+      'gadyansh': 'गद्यांश',
+      'kavyansh': 'काव्यांश',
+      'patra-lekhan': 'पत्र लेखन',
+      'nibandh-lekhan': 'निबंध लेखन',
+      
+      // English
+      'parts-of-speech': 'शब्द भेद',
+      'tenses': 'काल',
+      'voice-narration': 'वाच्य और कथन',
+      'sentence-structure': 'वाक्य संरचना',
+      'vocabulary-building': 'शब्द भंडार',
+      'synonyms-antonyms': 'समानार्थी और विपरीतार्थी',
+      'idioms-phrases': 'मुहावरे और वाक्यांश',
+      'one-word-substitution': 'एक शब्द प्रतिस्थापन',
+      'reading-comprehension': 'गद्यांश समझ',
+      'cloze-test': 'रिक्त स्थान पूर्ति',
+      'error-correction': 'त्रुटि सुधार',
+      'essay-writing': 'निबंध लेखन',
       
       // Math
-      'arithmetic': 'अंकगणित',
-      'algebra': 'बीजगणित', 
-      'geometry': 'ज्यामिति',
-      'statistics': 'सांख्यिकी',
+      'number-system': 'संख्या प्रणाली',
+      'percentage': 'प्रतिशत',
+      'profit-loss': 'लाभ-हानि',
+      'simple-compound-interest': 'साधारण और चक्रवृद्धि ब्याज',
+      'time-work': 'समय और कार्य',
+      'time-distance': 'समय और दूरी',
+      'averages': 'औसत',
+      'ratio-proportion': 'अनुपात और समानुपात',
+      'algebra-basics': 'बीजगणित मूल बातें',
+      'linear-equations': 'रैखिक समीकरण',
+      'geometry-basics': 'ज्यामिति मूल बातें',
+      'mensuration': 'क्षेत्रमिति',
+      'trigonometry': 'त्रिकोणमिति',
+      'statistics-basics': 'सांख्यिकी मूल बातें',
+      'probability': 'प्रायिकता',
+      'data-interpretation': 'डेटा व्याख्या',
       
       // GK
-      'current-affairs': 'समसामयिकी',
-      'static-gk': 'स्थिर सामान्य ज्ञान',
-      'important-dates': 'महत्वपूर्ण तिथियां',
-      'awards': 'पुरस्कार',
+      'current-affairs-national': 'राष्ट्रीय समसामयिकी',
+      'current-affairs-international': 'अंतर्राष्ट्रीय समसामयिकी',
+      'government-schemes': 'सरकारी योजनाएं',
+      'awards-honours': 'पुरस्कार और सम्मान',
+      'sports-events': 'खेल घटनाएं',
+      'books-authors': 'पुस्तकें और लेखक',
+      'important-days': 'महत्वपूर्ण दिवस',
+      'organizations': 'संगठन',
+      'capitals-currencies': 'राजधानी और मुद्रा',
+      'indian-states': 'भारतीय राज्य',
+      'world-geography-facts': 'विश्व भूगोल तथ्य',
+      'science-technology': 'विज्ञान और तकनीक',
+      'defence-security': 'रक्षा और सुरक्षा',
+      'economy-finance': 'अर्थव्यवस्था और वित्त',
       
       // Reasoning
-      'logical-reasoning': 'तार्किक तर्कशक्ति',
-      'analytical-reasoning': 'विश्लेषणात्मक तर्कशक्ति',
-      'verbal-reasoning': 'मौखिक तर्कशक्ति',
-      'non-verbal-reasoning': 'अमौखिक तर्कशक्ति'
+      'verbal-analogy': 'शाब्दिक सादृश्य',
+      'classification': 'वर्गीकरण',
+      'series-completion': 'श्रृंखला पूर्ति',
+      'coding-decoding': 'कोडिंग-डिकोडिंग',
+      'blood-relations': 'रक्त संबंध',
+      'direction-distance': 'दिशा और दूरी',
+      'ranking-arrangement': 'क्रम और व्यवस्था',
+      'syllogism': 'न्याय वाक्य',
+      'statement-conclusion': 'कथन और निष्कर्ष',
+      'statement-assumption': 'कथन और पूर्वधारणा',
+      'critical-reasoning': 'आलोचनात्मक तर्क',
+      'puzzles-seating': 'पहेली और बैठक व्यवस्था',
+      'calendar-clock': 'कैलेंडर और घड़ी',
+      'number-series': 'संख्या श्रृंखला',
+      'figure-series': 'आकृति श्रृंखला',
+      'pattern-completion': 'पैटर्न पूर्ति',
+      'mirror-water-images': 'दर्पण और जल प्रतिबिंब',
+      'paper-cutting-folding': 'कागज काटना और मोड़ना'
     };
     return topicNames[topicId] || topicId;
   };
