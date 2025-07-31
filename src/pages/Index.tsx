@@ -282,57 +282,55 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {navigation.view === 'content' ? (
-        renderContent()
-      ) : (
-        <>
-          <Header 
-            isDark={isDark}
-            onThemeToggle={toggleTheme}
-            title={getPageTitle()}
-            showBackButton={navigation.view !== 'subjects'}
-            onBack={navigation.view !== 'subjects' ? navigateBack : undefined}
-          />
-          
-          <div className="p-2 space-y-4">
-            {/* Search Bar */}
-            <SearchBar onSearch={handleSearch} />
-            
-            {/* Bottom Navigation - Always visible */}
-            <div className="fixed bottom-0 left-0 right-0 z-20 bg-background/95 backdrop-blur-sm border-t border-border">
-              <div className="p-2">
-                <Card className="p-1.5 mx-auto max-w-sm shadow-lg">
-                  <div className="flex items-center justify-around">
-                    <Button 
-                      variant={navigation.view === 'subjects' ? "default" : "ghost"} 
-                      size="sm" 
-                      onClick={navigateToSubjects} 
-                      className="flex-col gap-0.5 px-3 py-1.5 min-h-[36px]"
-                    >
-                      <Search className="w-3.5 h-3.5" />
-                      <span className="text-[10px] font-medium">विषय</span>
-                    </Button>
-                    <Button 
-                      variant={navigation.view === 'progress' ? "default" : "ghost"} 
-                      size="sm" 
-                      onClick={navigateToProgress} 
-                      className="flex-col gap-0.5 px-3 py-1.5 min-h-[36px]"
-                    >
-                      <BarChart3 className="w-3.5 h-3.5" />
-                      <span className="text-[10px] font-medium">प्रगति</span>
-                    </Button>
-                  </div>
-                </Card>
-              </div>
-            </div>
-            
-            {/* Main Content */}
-            <div className="pb-16">
-              {renderContent()}
-            </div>
-          </div>
-        </>
+      {navigation.view !== 'content' && (
+        <Header 
+          isDark={isDark}
+          onThemeToggle={toggleTheme}
+          title={getPageTitle()}
+          showBackButton={navigation.view !== 'subjects'}
+          onBack={navigation.view !== 'subjects' ? navigateBack : undefined}
+        />
       )}
+      
+      <div className={navigation.view === 'content' ? "min-h-screen" : "p-2 space-y-4"}>
+        {/* Search Bar - only show when not in content view */}
+        {navigation.view !== 'content' && (
+          <SearchBar onSearch={handleSearch} />
+        )}
+        
+        {/* Main Content */}
+        <div className="pb-20" style={{ minHeight: '107vh' }}>
+          {renderContent()}
+        </div>
+      </div>
+
+      {/* Bottom Navigation - Always visible */}
+      <div className="fixed bottom-0 left-0 right-0 z-20 bg-background/95 backdrop-blur-sm border-t border-border">
+        <div className="p-2">
+          <Card className="p-1.5 mx-auto max-w-sm shadow-lg">
+            <div className="flex items-center justify-around">
+              <Button 
+                variant={navigation.view === 'subjects' ? "default" : "ghost"} 
+                size="sm" 
+                onClick={navigateToSubjects} 
+                className="flex-col gap-0.5 px-3 py-1.5 min-h-[36px]"
+              >
+                <Search className="w-3.5 h-3.5" />
+                <span className="text-[10px] font-medium">विषय</span>
+              </Button>
+              <Button 
+                variant={navigation.view === 'progress' ? "default" : "ghost"} 
+                size="sm" 
+                onClick={navigateToProgress} 
+                className="flex-col gap-0.5 px-3 py-1.5 min-h-[36px]"
+              >
+                <BarChart3 className="w-3.5 h-3.5" />
+                <span className="text-[10px] font-medium">प्रगति</span>
+              </Button>
+            </div>
+          </Card>
+        </div>
+      </div>
       
       {/* Admin Panel */}
       {showAdminPanel && (
