@@ -34,10 +34,10 @@ export const Header = ({
           ) : null}
           
           <div className="flex items-center gap-1.5">
-            <h1 className="text-lg font-bold text-primary font-hindi">
+            <h1 className="text-base sm:text-lg font-bold text-primary font-hindi leading-tight">
               {title}
             </h1>
-            <Badge variant="secondary" className="text-[10px] px-1.5 py-0.5">
+            <Badge variant="secondary" className="text-[9px] sm:text-[10px] px-1 sm:px-1.5 py-0.5 hidden xs:inline-flex">
               UPSSSC PET
             </Badge>
           </div>

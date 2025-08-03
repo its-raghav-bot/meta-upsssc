@@ -76,8 +76,8 @@ export const SearchBar = ({ onSearch, placeholder = "नोट्स खोज�
 
   return (
     <div className="relative" ref={containerRef}>
-      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-        <Search className="w-4 h-4 text-muted-foreground" />
+      <div className="absolute inset-y-0 left-0 pl-3 sm:pl-3 flex items-center pointer-events-none">
+        <Search className="w-5 h-5 sm:w-4 sm:h-4 text-muted-foreground" />
       </div>
       
       <Input
@@ -86,18 +86,18 @@ export const SearchBar = ({ onSearch, placeholder = "नोट्स खोज�
         onChange={(e) => handleSearch(e.target.value)}
         onFocus={() => query.length > 0 && setShowSuggestions(true)}
         placeholder={placeholder}
-        className="pl-10 pr-10 text-hindi-lg bg-card border-border focus:border-primary"
+        className="pl-11 sm:pl-10 pr-11 sm:pr-10 text-base sm:text-hindi-lg bg-card border-border focus:border-primary h-12 sm:h-10"
       />
       
       {query && (
-        <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+        <div className="absolute inset-y-0 right-0 pr-3 sm:pr-3 flex items-center">
           <Button
             variant="ghost"
             size="sm"
             onClick={clearSearch}
-            className="h-auto p-1 hover:bg-transparent"
+            className="h-auto p-1.5 sm:p-1 hover:bg-transparent tap-target"
           >
-            <X className="w-4 h-4 text-muted-foreground" />
+            <X className="w-5 h-5 sm:w-4 sm:h-4 text-muted-foreground" />
           </Button>
         </div>
       )}
@@ -108,7 +108,7 @@ export const SearchBar = ({ onSearch, placeholder = "नोट्स खोज�
             <button
               key={index}
               onClick={() => selectSuggestion(suggestion)}
-              className="w-full text-left px-4 py-2 hover:bg-accent hover:text-accent-foreground text-sm transition-colors"
+              className="w-full text-left px-4 py-3 sm:py-2 hover:bg-accent hover:text-accent-foreground text-base sm:text-sm transition-colors tap-target"
             >
               {suggestion}
             </button>
