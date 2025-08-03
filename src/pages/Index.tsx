@@ -299,7 +299,7 @@ const Index = () => {
         )}
         
         {/* Main Content */}
-        <div className="pb-24 sm:pb-20" style={{ minHeight: '107vh' }}>
+        <div className={navigation.view === 'subjects' ? "pb-24 sm:pb-20" : "pb-24 sm:pb-20"} style={navigation.view !== 'subjects' ? { minHeight: '107vh' } : {}}>
           {renderContent()}
         </div>
       </div>
