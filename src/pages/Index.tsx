@@ -266,7 +266,7 @@ const Index = () => {
 
       case 'progress':
         return (
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-2.5">
             <ProgressDashboard 
               subjects={subjects} 
               recentTopics={getRecentTopics()} 

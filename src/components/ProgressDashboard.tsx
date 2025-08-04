@@ -28,42 +28,34 @@ export const ProgressDashboard = ({ subjects, recentTopics }: ProgressDashboardP
   }).length;
 
   return (
-    <div className="space-y-4 max-h-[calc(100vh-200px)] overflow-y-auto">
-      {/* Subject Progress */}
-      <Card className="p-4">
-        <div className="flex items-center gap-3 mb-4">
-          <Clock className="w-5 h-5 text-primary" />
-          <h2 className="text-lg font-semibold text-foreground">विषयवार प्रगति</h2>
-        </div>
+    <div className="grid grid-cols-2 gap-3 sm:gap-2 pb-4 sm:pb-3">
+      {subjects.map(subject => {
+        const subjectTotalTopics = subject.chapters.reduce((total, chapter) => 
+          total + chapter.topics.length, 0);
+        const subjectCompletedTopics = subject.chapters.reduce((total, chapter) => 
+          total + chapter.topics.filter(topic => topic.isCompleted).length, 0);
+        const subjectProgress = subjectTotalTopics > 0 ? 
+          (subjectCompletedTopics / subjectTotalTopics) * 100 : 0;
         
-        <div className="space-y-3">
-          {subjects.map(subject => {
-            const subjectTotalTopics = subject.chapters.reduce((total, chapter) => 
-              total + chapter.topics.length, 0);
-            const subjectCompletedTopics = subject.chapters.reduce((total, chapter) => 
-              total + chapter.topics.filter(topic => topic.isCompleted).length, 0);
-            const subjectProgress = subjectTotalTopics > 0 ? 
-              (subjectCompletedTopics / subjectTotalTopics) * 100 : 0;
-            
-            return (
-              <div key={subject.id} className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="text-lg">{subject.icon}</span>
-                    <span className="text-sm font-medium text-foreground">{subject.name}</span>
-                  </div>
-                  <Badge variant={subjectProgress === 100 ? "default" : "secondary"} className={
-                    subjectProgress === 100 ? "bg-success text-success-foreground" : ""
-                  }>
-                    {Math.round(subjectProgress)}%
-                  </Badge>
+        return (
+          <Card key={subject.id} className="p-3 sm:p-2.5 h-20 sm:h-16 flex flex-col justify-center">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="text-lg sm:text-base">{subject.icon}</span>
+                  <span className="text-xs font-medium text-foreground line-clamp-1">{subject.name}</span>
                 </div>
-                <Progress value={subjectProgress} className="h-2" />
+                <Badge variant={subjectProgress === 100 ? "default" : "secondary"} className={
+                  subjectProgress === 100 ? "bg-success text-success-foreground text-xs" : "text-xs"
+                }>
+                  {Math.round(subjectProgress)}%
+                </Badge>
               </div>
-            );
-          })}
-        </div>
-      </Card>
+              <Progress value={subjectProgress} className="h-1.5" />
+            </div>
+          </Card>
+        );
+      })}
     </div>
   );
 };
