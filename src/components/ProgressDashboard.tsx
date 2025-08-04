@@ -28,7 +28,7 @@ export const ProgressDashboard = ({ subjects, recentTopics }: ProgressDashboardP
   }).length;
 
   return (
-    <div className="grid grid-cols-2 gap-2 sm:gap-1.5 h-full">
+    <div className="grid grid-cols-2 gap-3 sm:gap-2 pb-4 sm:pb-3">
       {subjects.map(subject => {
         const subjectTotalTopics = subject.chapters.reduce((total, chapter) => 
           total + chapter.topics.length, 0);
@@ -38,7 +38,7 @@ export const ProgressDashboard = ({ subjects, recentTopics }: ProgressDashboardP
           (subjectCompletedTopics / subjectTotalTopics) * 100 : 0;
         
         return (
-          <Card key={subject.id} className="p-3 sm:p-2 h-[calc((100vh-180px)/6)] flex flex-col justify-center">
+          <Card key={subject.id} className="p-3 sm:p-2.5 h-20 sm:h-16 flex flex-col justify-center">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
