@@ -51,41 +51,17 @@ export const TopicContent = ({ topic, onBack, onToggleComplete }: TopicContentPr
           </h1>
         </div>
 
-        {/* Action buttons */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1.5">
-            <Button
-              variant={topic.isCompleted ? "default" : "outline"}
-              size="sm"
-              onClick={() => onToggleComplete(topic.id)}
-              className={`${topic.isCompleted ? "bg-success text-success-foreground" : ""} h-7 px-2.5 text-xs`}
-            >
-              {topic.isCompleted ? (
-                <>
-                  <CheckCircle2 className="w-3 h-3 mr-1" />
-                  पूर्ण
-                </>
-              ) : (
-                <>
-                  <Circle className="w-3 h-3 mr-1" />
-                  पूर्ण करें
-                </>
-              )}
-            </Button>
-          </div>
-
-          {/* Font size controls */}
-          <div className="flex items-center gap-0.5">
-            <Button variant="ghost" size="sm" onClick={decreaseFontSize} className="px-1.5 h-7 w-7">
-              <span className="text-xs">A</span>
-            </Button>
-            <Button variant="ghost" size="sm" onClick={() => setFontSize(16)} className="px-1.5 h-7 w-7">
-              <RotateCcw className="w-2.5 h-2.5" />
-            </Button>
-            <Button variant="ghost" size="sm" onClick={increaseFontSize} className="px-1.5 h-7 w-7">
-              <span className="text-sm">A</span>
-            </Button>
-          </div>
+        {/* Font size controls */}
+        <div className="flex items-center justify-end gap-0.5">
+          <Button variant="ghost" size="sm" onClick={decreaseFontSize} className="px-1.5 h-7 w-7">
+            <span className="text-xs">A</span>
+          </Button>
+          <Button variant="ghost" size="sm" onClick={() => setFontSize(16)} className="px-1.5 h-7 w-7">
+            <RotateCcw className="w-2.5 h-2.5" />
+          </Button>
+          <Button variant="ghost" size="sm" onClick={increaseFontSize} className="px-1.5 h-7 w-7">
+            <span className="text-sm">A</span>
+          </Button>
         </div>
       </div>
 

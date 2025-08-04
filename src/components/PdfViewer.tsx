@@ -134,22 +134,13 @@ export const PdfViewer = ({ pdfUrl, fileName, onDownload, isDownloaded }: PdfVie
         {/* PDF Preview/Access Info */}
         <div className="mt-6 p-4 bg-muted/50 rounded-lg">
           <div className="text-sm space-y-2">
-            {Capacitor.isNativePlatform() ? (
+            {Capacitor.isNativePlatform() && (
               <>
                 <p className="flex items-center gap-2">
                   📱 <span>मोबाइल ऐप में PDF सीधे खुलेगा</span>
                 </p>
                 <p className="flex items-center gap-2">
                   💾 <span>डाउनलोड की गई फाइलें डिवाइस में सेव होंगी</span>
-                </p>
-              </>
-            ) : (
-              <>
-                <p className="flex items-center gap-2">
-                  🌐 <span>PDF नई टैब में खुलेगा</span>
-                </p>
-                <p className="flex items-center gap-2">
-                  📥 <span>डाउनलोड फ़ोल्डर में सेव होगा</span>
                 </p>
               </>
             )}
