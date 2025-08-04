@@ -11,7 +11,7 @@ interface SubjectCardProps {
 export const SubjectCard = ({ subject, onClick }: SubjectCardProps) => {
   return (
     <Card 
-      className="p-4 sm:p-3 tap-target cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] border-2 hover:border-primary/50 min-h-[88px] sm:min-h-[72px] flex items-center bg-gradient-to-br from-card to-card/90"
+      className="p-3 sm:p-2 tap-target cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] border-2 hover:border-primary/50 h-[calc((100vh-180px)/6)] flex items-center bg-gradient-to-br from-card to-card/90"
       onClick={onClick}
     >
       <div className="flex items-center gap-3 sm:gap-2.5 w-full">

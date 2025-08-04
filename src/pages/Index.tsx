@@ -208,7 +208,7 @@ const Index = () => {
       case 'subjects':
         return (
           <div className="space-y-3 sm:space-y-2.5">
-            <div className="grid grid-cols-2 gap-4 sm:gap-3 pb-6 sm:pb-4 px-1">
+            <div className="grid grid-cols-2 gap-2 sm:gap-1.5 h-full">
               {subjects.map(subject => (
                 <SubjectCard
                   key={subject.id}
@@ -298,7 +298,7 @@ const Index = () => {
         </div>
       )}
 
-      <main className="flex-1 p-4 sm:p-3 pb-28 sm:pb-24 overflow-y-auto">
+      <main className="h-[calc(100vh-140px)] p-4 sm:p-3 pb-4 sm:pb-2 overflow-hidden">
         {renderContent()}
       </main>
 
