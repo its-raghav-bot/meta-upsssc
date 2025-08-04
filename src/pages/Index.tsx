@@ -208,7 +208,7 @@ const Index = () => {
       case 'subjects':
         return (
           <div className="space-y-3 sm:space-y-2.5">
-            <div className="grid grid-cols-2 gap-3 sm:gap-2 pb-4 sm:pb-3">
+            <div className="grid grid-cols-2 gap-4 sm:gap-3 pb-6 sm:pb-4 px-1">
               {subjects.map(subject => (
                 <SubjectCard
                   key={subject.id}
@@ -281,7 +281,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       {navigation.view !== 'content' && (
         <Header 
           isDark={isDark}
@@ -292,43 +292,42 @@ const Index = () => {
         />
       )}
       
-      <div className={navigation.view === 'content' ? "min-h-screen" : "p-3 sm:p-2 space-y-4"}>
-        {/* Search Bar - only show when not in content view */}
-        {navigation.view !== 'content' && (
+      {navigation.view !== 'content' && (
+        <div className="p-4 sm:p-3">
           <SearchBar onSearch={handleSearch} />
-        )}
-        
-        {/* Main Content */}
-        <div className={navigation.view === 'subjects' ? "pb-24 sm:pb-20" : "pb-24 sm:pb-20"} style={navigation.view !== 'subjects' ? { minHeight: '107vh' } : {}}>
-          {renderContent()}
         </div>
-      </div>
+      )}
 
-      {/* Bottom Navigation - Always visible */}
-      <div className="fixed bottom-0 left-0 right-0 z-20 bg-background/95 backdrop-blur-sm border-t border-border">
-        <div className="p-2.5 sm:p-2">
-          <Card className="p-2 sm:p-1.5 mx-auto max-w-sm shadow-lg">
-            <div className="flex items-center justify-around">
-              <Button 
-                variant={navigation.view === 'subjects' ? "default" : "ghost"} 
-                size="sm" 
-                onClick={navigateToSubjects} 
-                className="flex-col gap-1 sm:gap-0.5 px-4 sm:px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] tap-target"
-              >
-                <Search className="w-4 h-4 sm:w-3.5 sm:h-3.5" />
-                <span className="text-xs sm:text-[10px] font-medium">विषय</span>
-              </Button>
-              <Button 
-                variant={navigation.view === 'progress' ? "default" : "ghost"} 
-                size="sm" 
-                onClick={navigateToProgress} 
-                className="flex-col gap-1 sm:gap-0.5 px-4 sm:px-3 py-2 sm:py-1.5 min-h-[44px] sm:min-h-[36px] tap-target"
-              >
-                <BarChart3 className="w-4 h-4 sm:w-3.5 sm:h-3.5" />
-                <span className="text-xs sm:text-[10px] font-medium">प्रगति</span>
-              </Button>
-            </div>
-          </Card>
+      <main className="flex-1 p-4 sm:p-3 pb-28 sm:pb-24 overflow-y-auto">
+        {renderContent()}
+      </main>
+
+      {/* Fixed Bottom Navigation */}
+      <div className="fixed bottom-0 left-0 right-0 z-30 bg-background/95 backdrop-blur-sm border-t border-border">
+        <div className="flex safe-area-inset-bottom">
+          <button
+            onClick={navigateToSubjects}
+            className={`flex-1 flex flex-col items-center justify-center py-3 sm:py-2 px-3 sm:px-2 text-sm sm:text-xs transition-all duration-200 tap-target min-h-[60px] sm:min-h-[48px] ${
+              navigation.view === 'subjects' 
+                ? 'text-primary bg-primary/10 border-t-2 border-primary' 
+                : 'text-muted-foreground hover:text-foreground hover:bg-accent/50'
+            }`}
+          >
+            <span className="text-xl sm:text-lg mb-1 sm:mb-0.5">📚</span>
+            <span className="font-hindi font-semibold">विषय</span>
+          </button>
+          
+          <button
+            onClick={navigateToProgress}
+            className={`flex-1 flex flex-col items-center justify-center py-3 sm:py-2 px-3 sm:px-2 text-sm sm:text-xs transition-all duration-200 tap-target min-h-[60px] sm:min-h-[48px] ${
+              navigation.view === 'progress' 
+                ? 'text-primary bg-primary/10 border-t-2 border-primary' 
+                : 'text-muted-foreground hover:text-foreground hover:bg-accent/50'
+            }`}
+          >
+            <span className="text-xl sm:text-lg mb-1 sm:mb-0.5">📈</span>
+            <span className="font-hindi font-semibold">प्रगति</span>
+          </button>
         </div>
       </div>
       

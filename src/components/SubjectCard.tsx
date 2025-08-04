@@ -11,13 +11,13 @@ interface SubjectCardProps {
 export const SubjectCard = ({ subject, onClick }: SubjectCardProps) => {
   return (
     <Card 
-      className="p-3 sm:p-2.5 tap-target cursor-pointer transition-all duration-200 hover:shadow-lg active:scale-95 border-2 hover:border-primary/50 h-20 sm:h-16 flex items-center"
+      className="p-4 sm:p-3 tap-target cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] border-2 hover:border-primary/50 min-h-[88px] sm:min-h-[72px] flex items-center bg-gradient-to-br from-card to-card/90"
       onClick={onClick}
     >
-      <div className="flex items-center gap-2.5 sm:gap-2 w-full">
-        <div className="text-xl sm:text-lg flex-shrink-0">{subject.icon}</div>
+      <div className="flex items-center gap-3 sm:gap-2.5 w-full">
+        <div className="text-2xl sm:text-xl flex-shrink-0 drop-shadow-sm">{subject.icon}</div>
         <div className="flex-1 min-w-0">
-          <h3 className="font-semibold text-sm sm:text-xs text-card-foreground line-clamp-2 leading-tight">
+          <h3 className="font-semibold text-sm sm:text-xs text-card-foreground line-clamp-2 leading-tight font-hindi">
             {subject.name}
           </h3>
         </div>

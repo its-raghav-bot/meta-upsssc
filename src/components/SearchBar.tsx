@@ -76,8 +76,8 @@ export const SearchBar = ({ onSearch, placeholder = "नोट्स खोज�
 
   return (
     <div className="relative" ref={containerRef}>
-      <div className="absolute inset-y-0 left-0 pl-3 sm:pl-3 flex items-center pointer-events-none">
-        <Search className="w-5 h-5 sm:w-4 sm:h-4 text-muted-foreground" />
+      <div className="absolute inset-y-0 left-0 pl-4 sm:pl-3 flex items-center pointer-events-none">
+        <Search className="w-6 h-6 sm:w-5 sm:h-5 text-muted-foreground" />
       </div>
       
       <Input
@@ -86,29 +86,29 @@ export const SearchBar = ({ onSearch, placeholder = "नोट्स खोज�
         onChange={(e) => handleSearch(e.target.value)}
         onFocus={() => query.length > 0 && setShowSuggestions(true)}
         placeholder={placeholder}
-        className="pl-11 sm:pl-10 pr-11 sm:pr-10 text-base sm:text-hindi-lg bg-card border-border focus:border-primary h-12 sm:h-10"
+        className="pl-12 sm:pl-10 pr-12 sm:pr-10 text-base sm:text-hindi-lg bg-card border-border focus:border-primary h-14 sm:h-11 tap-target font-hindi"
       />
       
       {query && (
-        <div className="absolute inset-y-0 right-0 pr-3 sm:pr-3 flex items-center">
+        <div className="absolute inset-y-0 right-0 pr-4 sm:pr-3 flex items-center">
           <Button
             variant="ghost"
             size="sm"
             onClick={clearSearch}
-            className="h-auto p-1.5 sm:p-1 hover:bg-transparent tap-target"
+            className="h-auto p-2 sm:p-1.5 hover:bg-transparent tap-target"
           >
-            <X className="w-5 h-5 sm:w-4 sm:h-4 text-muted-foreground" />
+            <X className="w-6 h-6 sm:w-5 sm:h-5 text-muted-foreground" />
           </Button>
         </div>
       )}
 
       {showSuggestions && filteredSuggestions.length > 0 && (
-        <div className="absolute top-full left-0 right-0 mt-1 bg-background border border-border rounded-lg shadow-lg z-50 max-h-48 overflow-y-auto">
+        <div className="absolute top-full left-0 right-0 mt-2 sm:mt-1 bg-background border border-border rounded-lg shadow-lg z-50 max-h-56 sm:max-h-48 overflow-y-auto">
           {filteredSuggestions.map((suggestion, index) => (
             <button
               key={index}
               onClick={() => selectSuggestion(suggestion)}
-              className="w-full text-left px-4 py-3 sm:py-2 hover:bg-accent hover:text-accent-foreground text-base sm:text-sm transition-colors tap-target"
+              className="w-full text-left px-5 py-4 sm:px-4 sm:py-3 hover:bg-accent hover:text-accent-foreground text-base sm:text-sm transition-colors tap-target font-hindi min-h-[48px] sm:min-h-[40px] flex items-center"
             >
               {suggestion}
             </button>

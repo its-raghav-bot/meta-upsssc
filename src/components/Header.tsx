@@ -21,15 +21,15 @@ export const Header = ({
 }: HeaderProps) => {
   return (
     <header className="sticky top-0 z-20 bg-background/95 backdrop-blur-sm border-b border-border">
-        <div className="flex items-center justify-between p-2">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between p-3 sm:p-2">
+        <div className="flex items-center gap-3 sm:gap-2">
           {showBackButton && onBack ? (
-            <Button variant="ghost" size="sm" onClick={onBack} className="p-1.5 h-7 w-7">
+            <Button variant="ghost" size="sm" onClick={onBack} className="p-2 h-11 w-11 sm:p-1.5 sm:h-8 sm:w-8 tap-target">
               ←
             </Button>
           ) : onMenuClick ? (
-            <Button variant="ghost" size="sm" onClick={onMenuClick} className="p-1.5 h-7 w-7">
-              <Menu className="w-4 h-4" />
+            <Button variant="ghost" size="sm" onClick={onMenuClick} className="p-2 h-11 w-11 sm:p-1.5 sm:h-8 sm:w-8 tap-target">
+              <Menu className="w-5 h-5 sm:w-4 sm:h-4" />
             </Button>
           ) : null}
           
@@ -43,17 +43,17 @@ export const Header = ({
           </div>
         </div>
 
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-2 sm:gap-1.5">
           <Button
             variant="ghost"
             size="sm"
             onClick={onThemeToggle}
-            className="p-1.5 h-7 w-7"
+            className="p-2 h-11 w-11 sm:p-1.5 sm:h-8 sm:w-8 tap-target"
           >
             {isDark ? (
-              <Sun className="w-3.5 h-3.5" />
+              <Sun className="w-5 h-5 sm:w-4 sm:h-4" />
             ) : (
-              <Moon className="w-3.5 h-3.5" />
+              <Moon className="w-5 h-5 sm:w-4 sm:h-4" />
             )}
           </Button>
           
