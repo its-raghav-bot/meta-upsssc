@@ -11,19 +11,19 @@ export const subjects: Subject[] = [
       name: "Historical Topics",
       subjectId: "indian-history",
       topics: [
-        { id: "indus-valley", name: "Indus valley civilization", chapterId: "history-topics", content: "Content for Indus valley civilization", type: "text", isCompleted: false },
-        { id: "vedic-civilization", name: "Vedic civilization", chapterId: "history-topics", content: "Content for Vedic civilization", type: "text", isCompleted: false },
-        { id: "buddhism", name: "Buddhism", chapterId: "history-topics", content: "Content for Buddhism", type: "text", isCompleted: false },
-        { id: "jainism", name: "Jainism", chapterId: "history-topics", content: "Content for Jainism", type: "text", isCompleted: false },
-        { id: "mauryan-empire", name: "Mauryan empire", chapterId: "history-topics", content: "Content for Mauryan empire", type: "text", isCompleted: false },
-        { id: "gupta-empire", name: "Gupta empire", chapterId: "history-topics", content: "Content for Gupta empire", type: "text", isCompleted: false },
-        { id: "harshavardhan", name: "Harshavardhan", chapterId: "history-topics", content: "Content for Harshavardhan", type: "text", isCompleted: false },
-        { id: "rajput-era", name: "Rajput era", chapterId: "history-topics", content: "Content for Rajput era", type: "text", isCompleted: false },
-        { id: "sultanate-era", name: "Sultanate era", chapterId: "history-topics", content: "Content for Sultanate era", type: "text", isCompleted: false },
-        { id: "mughal-empire", name: "Mughal empire", chapterId: "history-topics", content: "Content for Mughal empire", type: "text", isCompleted: false },
-        { id: "maratha-empire", name: "Maratha empire", chapterId: "history-topics", content: "Content for Maratha empire", type: "text", isCompleted: false },
-        { id: "british-rule", name: "British Rule and 1st war of independence", chapterId: "history-topics", content: "Content for British Rule and 1st war of independence", type: "text", isCompleted: false },
-        { id: "social-economic-impact", name: "Social and economic impact of British rule", chapterId: "history-topics", content: "Content for Social and economic impact of British rule", type: "text", isCompleted: false }
+        { id: "indus-valley", name: "Indus valley civilization", hindiName: "सिंधु घाटी सभ्यता", chapterId: "history-topics", content: "Content for Indus valley civilization", type: "text", isCompleted: false },
+        { id: "vedic-civilization", name: "Vedic civilization", hindiName: "वैदिक सभ्यता", chapterId: "history-topics", content: "Content for Vedic civilization", type: "text", isCompleted: false },
+        { id: "buddhism", name: "Buddhism", hindiName: "बौद्ध धर्म", chapterId: "history-topics", content: "Content for Buddhism", type: "text", isCompleted: false },
+        { id: "jainism", name: "Jainism", hindiName: "जैन धर्म", chapterId: "history-topics", content: "Content for Jainism", type: "text", isCompleted: false },
+        { id: "mauryan-empire", name: "Mauryan empire", hindiName: "मौर्य साम्राज्य", chapterId: "history-topics", content: "Content for Mauryan empire", type: "text", isCompleted: false },
+        { id: "gupta-empire", name: "Gupta empire", hindiName: "गुप्त साम्राज्य", chapterId: "history-topics", content: "Content for Gupta empire", type: "text", isCompleted: false },
+        { id: "harshavardhan", name: "Harshavardhan", hindiName: "हर्षवर्धन", chapterId: "history-topics", content: "Content for Harshavardhan", type: "text", isCompleted: false },
+        { id: "rajput-era", name: "Rajput era", hindiName: "राजपूत युग", chapterId: "history-topics", content: "Content for Rajput era", type: "text", isCompleted: false },
+        { id: "sultanate-era", name: "Sultanate era", hindiName: "सल्तनत काल", chapterId: "history-topics", content: "Content for Sultanate era", type: "text", isCompleted: false },
+        { id: "mughal-empire", name: "Mughal empire", hindiName: "मुगल साम्राज्य", chapterId: "history-topics", content: "Content for Mughal empire", type: "text", isCompleted: false },
+        { id: "maratha-empire", name: "Maratha empire", hindiName: "मराठा साम्राज्य", chapterId: "history-topics", content: "Content for Maratha empire", type: "text", isCompleted: false },
+        { id: "british-rule", name: "British Rule and 1st war of independence", hindiName: "ब्रिटिश शासन और प्रथम स्वतंत्रता संग्राम", chapterId: "history-topics", content: "Content for British Rule and 1st war of independence", type: "text", isCompleted: false },
+        { id: "social-economic-impact", name: "Social and economic impact of British rule", hindiName: "ब्रिटिश शासन का सामाजिक और आर्थिक प्रभाव", chapterId: "history-topics", content: "Content for Social and economic impact of British rule", type: "text", isCompleted: false }
       ]
     }]
   },
@@ -37,11 +37,11 @@ export const subjects: Subject[] = [
       name: "Movement Topics",
       subjectId: "national-movement",
       topics: [
-        { id: "initial-stage", name: "Initial stage of freedom movement", chapterId: "movement-topics", content: "Content for Initial stage of freedom movement", type: "text", isCompleted: false },
-        { id: "swadeshi-civil-disobedience", name: "Swadeshi and civil disobedience movement - Mahatma Gandhi and other leaders' role", chapterId: "movement-topics", content: "Content for Swadeshi and civil disobedience movement", type: "text", isCompleted: false },
-        { id: "revolutionary-movement", name: "Revolutionary movement and rise of militant nationalism", chapterId: "movement-topics", content: "Content for Revolutionary movement and rise of militant nationalism", type: "text", isCompleted: false },
-        { id: "farewell-amendment", name: "Farewell Amendment and British India Act 1935", chapterId: "movement-topics", content: "Content for Farewell Amendment and British India Act 1935", type: "text", isCompleted: false },
-        { id: "quit-india", name: "Quit India movement, Azad Hind Fauj and Netaji Subhash Chandra Bose", chapterId: "movement-topics", content: "Content for Quit India movement, Azad Hind Fauj and Netaji Subhash Chandra Bose", type: "text", isCompleted: false }
+        { id: "initial-stage", name: "Initial stage of freedom movement", hindiName: "स्वतंत्रता आंदोलन का प्रारंभिक चरण", chapterId: "movement-topics", content: "Content for Initial stage of freedom movement", type: "text", isCompleted: false },
+        { id: "swadeshi-civil-disobedience", name: "Swadeshi and civil disobedience movement - Mahatma Gandhi and other leaders' role", hindiName: "स्वदेशी और सविनय अवज्ञा आंदोलन - महात्मा गांधी और अन्य नेताओं की भूमिका", chapterId: "movement-topics", content: "Content for Swadeshi and civil disobedience movement", type: "text", isCompleted: false },
+        { id: "revolutionary-movement", name: "Revolutionary movement and rise of militant nationalism", hindiName: "क्रांतिकारी आंदोलन और उग्र राष्ट्रवाद का उदय", chapterId: "movement-topics", content: "Content for Revolutionary movement and rise of militant nationalism", type: "text", isCompleted: false },
+        { id: "farewell-amendment", name: "Farewell Amendment and British India Act 1935", hindiName: "फेयरवेल संशोधन और भारत शासन अधिनियम 1935", chapterId: "movement-topics", content: "Content for Farewell Amendment and British India Act 1935", type: "text", isCompleted: false },
+        { id: "quit-india", name: "Quit India movement, Azad Hind Fauj and Netaji Subhash Chandra Bose", hindiName: "भारत छोड़ो आंदोलन, आज़ाद हिंद फौज और नेताजी सुभाष चंद्र बोस", chapterId: "movement-topics", content: "Content for Quit India movement, Azad Hind Fauj and Netaji Subhash Chandra Bose", type: "text", isCompleted: false }
       ]
     }]
   },
@@ -55,16 +55,16 @@ export const subjects: Subject[] = [
       name: "Geography Topics",
       subjectId: "geography",
       topics: [
-        { id: "rivers", name: "Rivers", chapterId: "geography-topics", content: "Content for Rivers", type: "text", isCompleted: false },
-        { id: "water-resources", name: "Water resources", chapterId: "geography-topics", content: "Content for Water resources", type: "text", isCompleted: false },
-        { id: "mountains-glaciers", name: "Mountains & glaciers", chapterId: "geography-topics", content: "Content for Mountains & glaciers", type: "text", isCompleted: false },
-        { id: "desert-dry-areas", name: "Desert & dry areas", chapterId: "geography-topics", content: "Content for Desert & dry areas", type: "text", isCompleted: false },
-        { id: "forest", name: "Forest", chapterId: "geography-topics", content: "Content for Forest", type: "text", isCompleted: false },
-        { id: "mineral-resources", name: "Mineral resources", chapterId: "geography-topics", content: "Content for Mineral resources", type: "text", isCompleted: false },
-        { id: "political-geography", name: "Political Geography of India & World", chapterId: "geography-topics", content: "Content for Political Geography of India & World", type: "text", isCompleted: false },
-        { id: "climate", name: "Climate", chapterId: "geography-topics", content: "Content for Climate", type: "text", isCompleted: false },
-        { id: "time-zone", name: "Time zone", chapterId: "geography-topics", content: "Content for Time zone", type: "text", isCompleted: false },
-        { id: "demographics-migrations", name: "Demographics & migrations", chapterId: "geography-topics", content: "Content for Demographics & migrations", type: "text", isCompleted: false }
+        { id: "rivers", name: "Rivers", hindiName: "नदियां", chapterId: "geography-topics", content: "Content for Rivers", type: "text", isCompleted: false },
+        { id: "water-resources", name: "Water resources", hindiName: "जल संसाधन", chapterId: "geography-topics", content: "Content for Water resources", type: "text", isCompleted: false },
+        { id: "mountains-glaciers", name: "Mountains & glaciers", hindiName: "पर्वत और हिमनद", chapterId: "geography-topics", content: "Content for Mountains & glaciers", type: "text", isCompleted: false },
+        { id: "desert-dry-areas", name: "Desert & dry areas", hindiName: "मरुस्थल और शुष्क क्षेत्र", chapterId: "geography-topics", content: "Content for Desert & dry areas", type: "text", isCompleted: false },
+        { id: "forest", name: "Forest", hindiName: "वन", chapterId: "geography-topics", content: "Content for Forest", type: "text", isCompleted: false },
+        { id: "mineral-resources", name: "Mineral resources", hindiName: "खनिज संसाधन", chapterId: "geography-topics", content: "Content for Mineral resources", type: "text", isCompleted: false },
+        { id: "political-geography", name: "Political Geography of India & World", hindiName: "भारत और विश्व का राजनीतिक भूगोल", chapterId: "geography-topics", content: "Content for Political Geography of India & World", type: "text", isCompleted: false },
+        { id: "climate", name: "Climate", hindiName: "जलवायु", chapterId: "geography-topics", content: "Content for Climate", type: "text", isCompleted: false },
+        { id: "time-zone", name: "Time zone", hindiName: "समय क्षेत्र", chapterId: "geography-topics", content: "Content for Time zone", type: "text", isCompleted: false },
+        { id: "demographics-migrations", name: "Demographics & migrations", hindiName: "जनसांख्यिकी और प्रवास", chapterId: "geography-topics", content: "Content for Demographics & migrations", type: "text", isCompleted: false }
       ]
     }]
   },

@@ -19,6 +19,7 @@ export interface Chapter {
 export interface Topic {
   id: string;
   name: string;
+  hindiName?: string; // Optional Hindi display name
   chapterId: string;
   content: string;
   type: 'text' | 'pdf';

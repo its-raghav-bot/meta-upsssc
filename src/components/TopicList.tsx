@@ -2,6 +2,7 @@ import { Topic } from "@/types/notes";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle2, Circle, FileText, Bookmark } from "lucide-react";
+import { getTopicDisplayName } from "@/utils/topicDisplay";
 
 interface TopicListProps {
   topics: Topic[];
@@ -31,10 +32,10 @@ export const TopicList = ({ topics, onTopicClick }: TopicListProps) => {
               
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-1.5 mb-1 sm:mb-0.5">
-                  <h3 className={`font-medium text-base sm:text-sm truncate ${
+                  <h3 className={`font-medium text-base sm:text-sm truncate font-hindi ${
                     topic.isCompleted ? 'text-success line-through' : 'text-card-foreground'
                   }`}>
-                    {topic.name}
+                    {getTopicDisplayName(topic, 'display')}
                   </h3>
                   {topic.bookmark && (
                     <Bookmark className="w-4 h-4 sm:w-3 sm:h-3 text-warning fill-current" />
