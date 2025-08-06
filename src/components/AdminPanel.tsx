@@ -338,8 +338,14 @@ export const AdminPanel = ({ onClose }: AdminPanelProps) => {
 
     setUploading(true);
     try {
+      // Sanitize filename by removing special characters and spaces
+      const sanitizedFileName = formData.file.name
+        .replace(/[^a-zA-Z0-9.-]/g, '_') // Replace special chars with underscore
+        .replace(/_{2,}/g, '_') // Replace multiple underscores with single
+        .replace(/^_|_$/g, ''); // Remove leading/trailing underscores
+      
       // Generate unique file path  
-      const fileName = `${Date.now()}-${formData.file.name}`;
+      const fileName = `${Date.now()}-${sanitizedFileName}`;
       const filePath = `${formData.subject}/${fileName}`;
 
       // Upload file to Supabase Storage
